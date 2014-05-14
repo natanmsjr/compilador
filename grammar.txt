@@ -1,0 +1,121 @@
+//Especificação da Gramática para o Projeto de Compiladores
+//Grupo: 	JAIR KLEYTON DA SILVA NUNES
+//	 		NATANAEL MACEDO DA SILVA JUNIOR
+
+Package compilador;
+
+Helpers
+	todos 			= [' ' + [39 .. 127]];
+	minusculas		= ['a' .. 'z'];
+	maiusculas 		= ['A' .. 'Z'];
+	letra			= minusculas | maiusculas;
+	digito			= ['0' .. '9'];
+	inteiro			= '-'? digito+;
+	real 			= '-'? digito+ '.' digito+;
+	numero			= inteiro | real;
+	tab				= 9;
+	lf				= 10; // Line Feed
+	cr 				= 13; // Carriage Return
+	eol				= cr | lf | cr lf;
+	caractere 		= ''' letra | digito | [todos - [cr + lf]] ''';
+	vetor			= '[' (numero | caractere)+ ']';
+	id 				= (letra | '_')(letra | digito | '_')*;
+	// coment_longo	= '/*' [todos - '*']* '*'+ todos - ['*' + '/'] [todos - '*']* '*'+ '/';
+
+States
+	normal,
+	comment;
+	
+Tokens
+	
+	// separadores
+	ponto 			= '.';
+	doispontos		= ':';
+	virgula 		= ',';
+	pontovirgula	= ';';
+	e_parentese 	= '(';
+	d_parentese 	= ')';
+	e_colchete 		= '[';
+	d_colchete 		= ']';
+	e_chave 		= '{';
+	d_chave 		= '}';
+		
+	// operadores
+	mais 			= '+';
+	menos 			= '-';
+	multiplicacao 	= '*';
+	divisao 		= '/';
+	porcentagem 	= '%';
+	resto 			= 'resto';
+	atribuicao		= ':=';
+	igual 			= '=';
+	diferente 		= '<>';
+	maiorq			= '>';
+	menorq 			= '<';
+	maiorigual		= '>=';
+	menorigual		= '<=';
+	e				= 'e';
+	ou				= 'ou';
+	nao				= 'nao';
+	eou     		= 'eou';
+		
+	// palavras reservadas
+	programa 		= 'programa';
+	inicio 			= 'inicio';
+	fim 			= 'fim';
+	variavel		= 'var';
+	inteiro 		= 'inteiro';
+	real			= 'real';
+	caractere 		= 'caractere';
+	escreva 		= 'escreva';
+	leia			= 'leia';
+	constante 		= 'constante';
+	se 				= 'se';
+	entao 			= 'entao';
+	senao 			= 'senao';
+	fimse			= 'fim se';
+	enquanto 		= 'enquanto';
+	fimenquanto 	= 'fim enquanto';
+	para 			= 'para';
+	faca 			= 'faça';
+	fimpara 		= 'fim para';	
+	caso 			= 'caso';
+	ate 			= 'ate';
+	repita 			= 'repita';
+	fimrepita 		= 'fim repita';
+	retorne 		= 'retorne';
+	pacote			= 'pacote';
+	nulo			= 'nulo';
+	
+	// identificadores
+	tipo 			= numero | caractere;
+	{normal} var	= id | id '[' digito+ ']';
+		
+	// espaço em braco e comentarios	
+	{normal} blank 	= (' ' | tab | eol )*;
+	
+	{normal -> comment, comment}
+					comment = '/*';
+	{comment} comment_fim 	= '*/';
+	{comment} comment_corpo = [todos - ['*' + '/']]*;
+	{comment} estrela 		= '*';
+	{comment} barra 		= '/';	
+	
+	comentario	= '//' todos* eol;
+	
+Ignored Tokens
+	blank,
+	comentario;
+	
+Productions
+	expr 		= {fator} fator
+				| {mais} expr mais fator
+				| {menos} expr menos fator;
+
+	fator 		= {termo} termo
+				| {multiplicacao} fator multiplicacao termo
+				| {divisao} fator divisao termo
+				| {resto} fator resto termo;
+
+	termo 		= {inteiro} inteiro
+				| {expr} e_parentese expr d_parentese;

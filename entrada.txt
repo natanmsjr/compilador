@@ -1,0 +1,3 @@
+programa nome_do_programa
+inicio
+fim.
