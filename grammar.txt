@@ -11,13 +11,12 @@ Helpers
 	letra			= minusculas | maiusculas;
 	digito			= ['0' .. '9'];
 	inteiro			= '-'? digito+;
-	real 			= '-'? digito+ '.' digito+;
-	numero			= inteiro | real;
-	tab			= 9;
-	lf			= 10; // Line Feed
-	cr 			= 13; // Carriage Return
-	caractere 		= ''' letra | digito | [todos - [cr + lf]] ''';
-	eol			= cr | lf | cr lf;
+	real 			= '-'? digito? '.' digito+;
+	tab				= 9;
+	lf				= 10; // Line Feed
+	cr 				= 13; // Carriage Return
+	caractere 		= letra | digito | [todos - [cr + lf]];
+	eol				= cr | lf | cr lf;	
 	comentario_linha= '//' todos* eol;
 
 States
@@ -44,8 +43,6 @@ Tokens
 	{normal} menos 		= '-';
 	{normal} multiplicacao 	= '*';
 	{normal} divisao 	= '/';
-	porcentagem 	= '%';
-	resto 			= 'resto';
 	{normal} atribuicao	= '<-';
 	
 	{normal} igual 		= '=';
@@ -77,8 +74,8 @@ Tokens
 	{normal} senao 		= 'senao';
 	{normal} fim_se		= 'fim se';
 	
-	{normal} enquanto 		= 'enquanto';
-	{normal} faca 			= 'faca';
+	{normal} enquanto 	= 'enquanto';
+	{normal} faca 		= 'faca';
 	{normal} fim_enquanto 	= 'fim enquanto';
 	
 	{normal} para 		= 'para';
@@ -86,26 +83,29 @@ Tokens
 	{normal} passo		= 'passo';	
 	{normal} fim_para 	= 'fim para';
 	
+	{normal} avalie 	= 'avalie';
 	{normal} caso 		= 'caso';
 	{normal} fim_avalie	= 'fim avalie';
-	{normal} repita 		= 'repita';
-	{normal} ate 			= 'ate';
-	{normal} fim_repita		= 'fim repita';
+	
+	{normal} repita 	= 'repita';
+	{normal} ate 		= 'ate';
+	{normal} fim_repita	= 'fim repita';
 	{normal} interromper	= 'interromper';
 	
-	retorne 		= 'retorne';
-	pacote			= 'pacote';
-	nulo			= 'nulo';
+	{normal} retorne 	= 'retorne';
+	{normal} pacote		= 'pacote';
+	{normal} nulo		= 'nulo';
 	
 	// identificadores
-	tipo 			= numero | caractere;
-	{normal} var	= id | id '[' digito+ ']';
+	{normal} id		= (letra | '_')(letra | digito | '_')*;
+	{normal} numero		= inteiro;
+	{normal} numero_real	= real;
 		
-	// espa�o em braco e comentarios	
-	{normal} blank 	= (' ' | tab | eol )*;
+	// espaço em braco e comentarios	
+	{normal} blank 			= (' ' | tab | eol )+;
+	{normal} comentario		= comentario_linha;
 	
-	{normal -> comment, comment}
-					comment = '/*';
+	{normal -> comment, comment} comment = '/*';
 	{comment} comment_fim 	= '*/';
 	{comment} comment_corpo = [todos - ['*' + '/']]*;
 	{comment} estrela 		= '*';
