@@ -1,6 +1,6 @@
-//Especificação da Gramática para o Projeto de Compiladores
+//Especificaï¿½ï¿½o da Gramï¿½tica para o Projeto de Compiladores
 //Grupo: 	JAIR KLEYTON DA SILVA NUNES
-//	 		NATANAEL MACEDO DA SILVA JUNIOR
+//	 	NATANAEL MACEDO DA SILVA JUNIOR
 
 Package compilador;
 
@@ -13,14 +13,12 @@ Helpers
 	inteiro			= '-'? digito+;
 	real 			= '-'? digito+ '.' digito+;
 	numero			= inteiro | real;
-	tab				= 9;
-	lf				= 10; // Line Feed
-	cr 				= 13; // Carriage Return
-	eol				= cr | lf | cr lf;
+	tab			= 9;
+	lf			= 10; // Line Feed
+	cr 			= 13; // Carriage Return
 	caractere 		= ''' letra | digito | [todos - [cr + lf]] ''';
-	vetor			= '[' (numero | caractere)+ ']';
-	id 				= (letra | '_')(letra | digito | '_')*;
-	// coment_longo	= '/*' [todos - '*']* '*'+ todos - ['*' + '/'] [todos - '*']* '*'+ '/';
+	eol			= cr | lf | cr lf;
+	comentario_linha= '//' todos* eol;
 
 States
 	normal,
@@ -29,35 +27,38 @@ States
 Tokens
 	
 	// separadores
-	ponto 			= '.';
-	doispontos		= ':';
-	virgula 		= ',';
-	pontovirgula	= ';';
-	e_parentese 	= '(';
-	d_parentese 	= ')';
-	e_colchete 		= '[';
-	d_colchete 		= ']';
-	e_chave 		= '{';
-	d_chave 		= '}';
+	{normal} ponto		= '.';
+	{normal} dois_pontos	= ':';
+	{normal} virgula 	= ',';
+	{normal} ponto_virgula	= ';';
+	{normal} barra		= '|';
+	{normal} e_parentese 	= '(';
+	{normal} d_parentese 	= ')';
+	{normal} e_colchete 	= '[';
+	{normal} d_colchete 	= ']';
+	{normal} e_chave 	= '{';
+	{normal} d_chave	= '}';
 		
 	// operadores
-	mais 			= '+';
-	menos 			= '-';
-	multiplicacao 	= '*';
-	divisao 		= '/';
+	{normal} mais 		= '+';
+	{normal} menos 		= '-';
+	{normal} multiplicacao 	= '*';
+	{normal} divisao 	= '/';
 	porcentagem 	= '%';
 	resto 			= 'resto';
-	atribuicao		= ':=';
-	igual 			= '=';
-	diferente 		= '<>';
-	maiorq			= '>';
-	menorq 			= '<';
-	maiorigual		= '>=';
-	menorigual		= '<=';
-	e				= 'e';
-	ou				= 'ou';
-	nao				= 'nao';
-	eou     		= 'eou';
+	{normal} atribuicao	= '<-';
+	
+	{normal} igual 		= '=';
+	{normal} diferente 	= '<>';	
+	{normal} maior_q	= '>';
+	{normal} menor_q 	= '<';
+	{normal} maior_igual	= '>=';
+	{normal} menor_igual	= '<=';
+		
+	{normal} e		= 'e';
+	{normal} ou		= 'ou';
+	{normal} nao		= 'nao';
+	{normal} eou     	= 'eou';
 		
 	// palavras reservadas
 	programa 		= 'programa';
@@ -77,7 +78,7 @@ Tokens
 	enquanto 		= 'enquanto';
 	fimenquanto 	= 'fim enquanto';
 	para 			= 'para';
-	faca 			= 'faça';
+	faca 			= 'faï¿½a';
 	fimpara 		= 'fim para';	
 	caso 			= 'caso';
 	ate 			= 'ate';
@@ -91,7 +92,7 @@ Tokens
 	tipo 			= numero | caractere;
 	{normal} var	= id | id '[' digito+ ']';
 		
-	// espaço em braco e comentarios	
+	// espaï¿½o em braco e comentarios	
 	{normal} blank 	= (' ' | tab | eol )*;
 	
 	{normal -> comment, comment}
