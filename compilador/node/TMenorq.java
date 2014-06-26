@@ -5,14 +5,14 @@ package compilador.node;
 import compilador.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TMenorq extends Token
+public final class TMenorQ extends Token
 {
-    public TMenorq()
+    public TMenorQ()
     {
         super.setText("<");
     }
 
-    public TMenorq(int line, int pos)
+    public TMenorQ(int line, int pos)
     {
         super.setText("<");
         setLine(line);
@@ -22,18 +22,18 @@ public final class TMenorq extends Token
     @Override
     public Object clone()
     {
-      return new TMenorq(getLine(), getPos());
+      return new TMenorQ(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTMenorq(this);
+        ((Analysis) sw).caseTMenorQ(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TMenorq text.");
+        throw new RuntimeException("Cannot change TMenorQ text.");
     }
 }

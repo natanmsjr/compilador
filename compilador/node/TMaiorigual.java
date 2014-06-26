@@ -5,14 +5,14 @@ package compilador.node;
 import compilador.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TMaiorigual extends Token
+public final class TMaiorIgual extends Token
 {
-    public TMaiorigual()
+    public TMaiorIgual()
     {
         super.setText(">=");
     }
 
-    public TMaiorigual(int line, int pos)
+    public TMaiorIgual(int line, int pos)
     {
         super.setText(">=");
         setLine(line);
@@ -22,18 +22,18 @@ public final class TMaiorigual extends Token
     @Override
     public Object clone()
     {
-      return new TMaiorigual(getLine(), getPos());
+      return new TMaiorIgual(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTMaiorigual(this);
+        ((Analysis) sw).caseTMaiorIgual(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TMaiorigual text.");
+        throw new RuntimeException("Cannot change TMaiorIgual text.");
     }
 }

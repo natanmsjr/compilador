@@ -5,14 +5,14 @@ package compilador.node;
 import compilador.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TDoispontos extends Token
+public final class TDoisPontos extends Token
 {
-    public TDoispontos()
+    public TDoisPontos()
     {
         super.setText(":");
     }
 
-    public TDoispontos(int line, int pos)
+    public TDoisPontos(int line, int pos)
     {
         super.setText(":");
         setLine(line);
@@ -22,18 +22,18 @@ public final class TDoispontos extends Token
     @Override
     public Object clone()
     {
-      return new TDoispontos(getLine(), getPos());
+      return new TDoisPontos(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTDoispontos(this);
+        ((Analysis) sw).caseTDoisPontos(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TDoispontos text.");
+        throw new RuntimeException("Cannot change TDoisPontos text.");
     }
 }

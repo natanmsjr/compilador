@@ -5,14 +5,14 @@ package compilador.node;
 import compilador.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TFimenquanto extends Token
+public final class TFimEnquanto extends Token
 {
-    public TFimenquanto()
+    public TFimEnquanto()
     {
         super.setText("fim enquanto");
     }
 
-    public TFimenquanto(int line, int pos)
+    public TFimEnquanto(int line, int pos)
     {
         super.setText("fim enquanto");
         setLine(line);
@@ -22,18 +22,18 @@ public final class TFimenquanto extends Token
     @Override
     public Object clone()
     {
-      return new TFimenquanto(getLine(), getPos());
+      return new TFimEnquanto(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTFimenquanto(this);
+        ((Analysis) sw).caseTFimEnquanto(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TFimenquanto text.");
+        throw new RuntimeException("Cannot change TFimEnquanto text.");
     }
 }

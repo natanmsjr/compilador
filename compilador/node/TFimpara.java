@@ -5,14 +5,14 @@ package compilador.node;
 import compilador.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TFimpara extends Token
+public final class TFimPara extends Token
 {
-    public TFimpara()
+    public TFimPara()
     {
         super.setText("fim para");
     }
 
-    public TFimpara(int line, int pos)
+    public TFimPara(int line, int pos)
     {
         super.setText("fim para");
         setLine(line);
@@ -22,18 +22,18 @@ public final class TFimpara extends Token
     @Override
     public Object clone()
     {
-      return new TFimpara(getLine(), getPos());
+      return new TFimPara(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTFimpara(this);
+        ((Analysis) sw).caseTFimPara(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TFimpara text.");
+        throw new RuntimeException("Cannot change TFimPara text.");
     }
 }

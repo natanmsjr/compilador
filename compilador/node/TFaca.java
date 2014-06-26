@@ -9,12 +9,12 @@ public final class TFaca extends Token
 {
     public TFaca()
     {
-        super.setText("faça");
+        super.setText("faca");
     }
 
     public TFaca(int line, int pos)
     {
-        super.setText("faça");
+        super.setText("faca");
         setLine(line);
         setPos(pos);
     }

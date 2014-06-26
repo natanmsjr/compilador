@@ -5,14 +5,14 @@ package compilador.node;
 import compilador.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TFimrepita extends Token
+public final class TFimRepita extends Token
 {
-    public TFimrepita()
+    public TFimRepita()
     {
         super.setText("fim repita");
     }
 
-    public TFimrepita(int line, int pos)
+    public TFimRepita(int line, int pos)
     {
         super.setText("fim repita");
         setLine(line);
@@ -22,18 +22,18 @@ public final class TFimrepita extends Token
     @Override
     public Object clone()
     {
-      return new TFimrepita(getLine(), getPos());
+      return new TFimRepita(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTFimrepita(this);
+        ((Analysis) sw).caseTFimRepita(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TFimrepita text.");
+        throw new RuntimeException("Cannot change TFimRepita text.");
     }
 }

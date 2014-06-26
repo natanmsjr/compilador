@@ -5,14 +5,14 @@ package compilador.node;
 import compilador.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TFimse extends Token
+public final class TFimSe extends Token
 {
-    public TFimse()
+    public TFimSe()
     {
         super.setText("fim se");
     }
 
-    public TFimse(int line, int pos)
+    public TFimSe(int line, int pos)
     {
         super.setText("fim se");
         setLine(line);
@@ -22,18 +22,18 @@ public final class TFimse extends Token
     @Override
     public Object clone()
     {
-      return new TFimse(getLine(), getPos());
+      return new TFimSe(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTFimse(this);
+        ((Analysis) sw).caseTFimSe(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TFimse text.");
+        throw new RuntimeException("Cannot change TFimSe text.");
     }
 }

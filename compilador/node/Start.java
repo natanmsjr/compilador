@@ -7,7 +7,7 @@ import compilador.analysis.*;
 @SuppressWarnings("nls")
 public final class Start extends Node
 {
-    private PExpr _pExpr_;
+    private PAlgoritmo _pAlgoritmo_;
     private EOF _eof_;
 
     public Start()
@@ -16,10 +16,10 @@ public final class Start extends Node
     }
 
     public Start(
-        @SuppressWarnings("hiding") PExpr _pExpr_,
+        @SuppressWarnings("hiding") PAlgoritmo _pAlgoritmo_,
         @SuppressWarnings("hiding") EOF _eof_)
     {
-        setPExpr(_pExpr_);
+        setPAlgoritmo(_pAlgoritmo_);
         setEOF(_eof_);
     }
 
@@ -27,7 +27,7 @@ public final class Start extends Node
     public Object clone()
     {
         return new Start(
-            cloneNode(this._pExpr_),
+            cloneNode(this._pAlgoritmo_),
             cloneNode(this._eof_));
     }
 
@@ -37,16 +37,16 @@ public final class Start extends Node
         ((Analysis) sw).caseStart(this);
     }
 
-    public PExpr getPExpr()
+    public PAlgoritmo getPAlgoritmo()
     {
-        return this._pExpr_;
+        return this._pAlgoritmo_;
     }
 
-    public void setPExpr(PExpr node)
+    public void setPAlgoritmo(PAlgoritmo node)
     {
-        if(this._pExpr_ != null)
+        if(this._pAlgoritmo_ != null)
         {
-            this._pExpr_.parent(null);
+            this._pAlgoritmo_.parent(null);
         }
 
         if(node != null)
@@ -59,7 +59,7 @@ public final class Start extends Node
             node.parent(this);
         }
 
-        this._pExpr_ = node;
+        this._pAlgoritmo_ = node;
     }
 
     public EOF getEOF()
@@ -90,9 +90,9 @@ public final class Start extends Node
     @Override
     void removeChild(Node child)
     {
-        if(this._pExpr_ == child)
+        if(this._pAlgoritmo_ == child)
         {
-            this._pExpr_ = null;
+            this._pAlgoritmo_ = null;
             return;
         }
 
@@ -108,9 +108,9 @@ public final class Start extends Node
     @Override
     void replaceChild(Node oldChild, Node newChild)
     {
-        if(this._pExpr_ == oldChild)
+        if(this._pAlgoritmo_ == oldChild)
         {
-            setPExpr((PExpr) newChild);
+            setPAlgoritmo((PAlgoritmo) newChild);
             return;
         }
 
@@ -127,7 +127,7 @@ public final class Start extends Node
     public String toString()
     {
         return "" +
-            toString(this._pExpr_) +
+            toString(this._pAlgoritmo_) +
             toString(this._eof_);
     }
 }

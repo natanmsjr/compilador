@@ -5,14 +5,14 @@ package compilador.node;
 import compilador.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TMenorigual extends Token
+public final class TMenorIgual extends Token
 {
-    public TMenorigual()
+    public TMenorIgual()
     {
         super.setText("<=");
     }
 
-    public TMenorigual(int line, int pos)
+    public TMenorIgual(int line, int pos)
     {
         super.setText("<=");
         setLine(line);
@@ -22,18 +22,18 @@ public final class TMenorigual extends Token
     @Override
     public Object clone()
     {
-      return new TMenorigual(getLine(), getPos());
+      return new TMenorIgual(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTMenorigual(this);
+        ((Analysis) sw).caseTMenorIgual(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TMenorigual text.");
+        throw new RuntimeException("Cannot change TMenorIgual text.");
     }
 }
