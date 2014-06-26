@@ -61,29 +61,38 @@ Tokens
 	{normal} eou     	= 'eou';
 		
 	// palavras reservadas
-	programa 		= 'programa';
-	inicio 			= 'inicio';
-	fim 			= 'fim';
-	variavel		= 'var';
-	inteiro 		= 'inteiro';
-	real			= 'real';
-	caractere 		= 'caractere';
-	escreva 		= 'escreva';
-	leia			= 'leia';
-	constante 		= 'constante';
-	se 				= 'se';
-	entao 			= 'entao';
-	senao 			= 'senao';
-	fimse			= 'fim se';
-	enquanto 		= 'enquanto';
-	fimenquanto 	= 'fim enquanto';
-	para 			= 'para';
-	faca 			= 'fa�a';
-	fimpara 		= 'fim para';	
-	caso 			= 'caso';
-	ate 			= 'ate';
-	repita 			= 'repita';
-	fimrepita 		= 'fim repita';
+	{normal} programa 	= 'programa';
+	{normal} inicio 	= 'inicio';
+	{normal} fim 		= 'fim.';
+	
+	{normal} inteiro	= 'inteiro';
+	{normal} real		= 'real';
+	{normal} caractere	= 'caractere';
+	
+	{normal} escreva 	= 'escreva';
+	{normal} leia		= 'leia';
+	
+	{normal} se 		= 'se';
+	{normal} entao 		= 'entao';
+	{normal} senao 		= 'senao';
+	{normal} fim_se		= 'fim se';
+	
+	{normal} enquanto 		= 'enquanto';
+	{normal} faca 			= 'faca';
+	{normal} fim_enquanto 	= 'fim enquanto';
+	
+	{normal} para 		= 'para';
+	{normal} de		= 'de';
+	{normal} passo		= 'passo';	
+	{normal} fim_para 	= 'fim para';
+	
+	{normal} caso 		= 'caso';
+	{normal} fim_avalie	= 'fim avalie';
+	{normal} repita 		= 'repita';
+	{normal} ate 			= 'ate';
+	{normal} fim_repita		= 'fim repita';
+	{normal} interromper	= 'interromper';
+	
 	retorne 		= 'retorne';
 	pacote			= 'pacote';
 	nulo			= 'nulo';
