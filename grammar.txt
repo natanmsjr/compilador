@@ -100,24 +100,73 @@ Tokens
 	{normal} id		= (letra | '_')(letra | digito | '_')*;
 	{normal} numero		= inteiro;
 	{normal} numero_real	= real;
+	{normal} string		= ''' caractere* ''';
+	{normal} constante	= 'constante';
+	{normal} tipo	 	= inteiro | real | caractere;
 		
 	// espaço em braco e comentarios	
-	{normal} blank 			= (' ' | tab | eol )+;
-	{normal} comentario		= comentario_linha;
+	{normal} blank 		= (' ' | tab | eol )+;
+	{normal} comentario	= comentario_linha;
 	
-	{normal -> comment, comment} comment = '/*';
-	{comment} comment_fim 	= '*/';
-	{comment} comment_corpo = [todos - ['*' + '/']]*;
-	{comment} estrela 		= '*';
-	{comment} barra 		= '/';	
-	
-	comentario	= '//' todos* eol;
+	{normal -> comment, comment} comentario_aninhado = '/*';
+	{comment} comentario_aninhado_fim = '*/';
+	{comment} comentario_aninhado_corpo = [todos - ['*' + '/']]*;
+	{comment} estrela = '*';
+	{comment} barra_inclinada = '/';	
+	{comment} comentario_linha = comentario_linha;
 	
 Ignored Tokens
 	blank,
-	comentario;
+	comentario,
+	comentario_aninhado;
 	
 Productions
+
+	comandos	= {atribuicao} var atribuicao expressao_aritmetica ponto_virgula
+			| {leia} leia e_parentese var d_parentese ponto_virgula
+			| {escreva} escreva e_parentese expressao_aritmetica d_parentese ponto_virgula
+			| {se} se e_parentese expressao_logica d_parentese entao comandos* senao_se? fim_se ponto_virgula 
+			| {avalie} avalie e_parentese expressao_logica d_parentese p_caso* senao_p_caso? fim_avalie ponto_virgula
+			| {enquanto} enquanto e_parentese expressao_logica d_parentese faca comandos* fim_enquanto ponto_virgula
+			| {repita} repita comandos* ate e_parentese expressao_logica d_parentese ponto_virgula
+			| {para} para var de [inicio]:numero ate [fim]:numero faca comandos* fim_para ponto_virgula
+			| {para_passo} para var de [inicio]:numero passo [passos]:numero ate [fim]:numero faca comandos* fim_para ponto_virgula;
+	
+	senao_se 	= {senao_se} senao comandos*;
+	
+	p_caso		= {caso} valor dois_pontos comandos*;
+	
+	senao_p_caso	= {senao_caso} senao dois_pontos comandos*;
+	
+	expressao_logica	= {logica} e_parentese expressao_logica d_parentese
+				| {e} expressao_relacional e expressao_logica
+				| {ou} expressao_relacional ou expressao_logica
+				| {eou} expressao_relacional eou expressao_logica
+				| {nao} nao? expressao_logica
+				| {relacional} expressao_relacional;
+	
+	expressao_relacional	= {igual} expressao_aritmetica igual expressao_relacional
+				| {maior_igual} expressao_aritmetica maior_igual expressao_relacional
+				| {menor_igual} expressao_aritmetica menor_igual expressao_relacional
+				| {diferente} expressao_aritmetica diferente expressao_relacional 
+				| {maior_q} expressao_aritmetica maior_q expressao_relacional
+				| {manor_q} expressao_aritmetica menor_q expressao_relacional							
+				| {expressoes} expressao_aritmetica;
+	
+	
+	expressao_aritmetica	= {nao} menos expressao_aritmetica
+				| {mais} termo mais expressao_aritmetica
+				| {menos} termo menos expressao_aritmetica
+				| {termo} termo;
+
+	termo 			= {multiplicacao} fator multiplicacao termo
+				| {divisao} fator divisao termo
+				| {fator} fator;
+				
+	fator 			= {expressao} e_parentese expressao_aritmetica d_parentese
+				| {variavel} variavel
+				| {valor} valor;
+	
 	expr 		= {fator} fator
 				| {mais} expr mais fator
 				| {menos} expr menos fator;
