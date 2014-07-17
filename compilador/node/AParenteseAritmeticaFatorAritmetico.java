@@ -5,51 +5,56 @@ package compilador.node;
 import compilador.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AMenosExpressaoAritmetica extends PExpressaoAritmetica
+public final class AParenteseAritmeticaFatorAritmetico extends PFatorAritmetico
 {
-    private TMenos _menos_;
+    private TEParentese _eParentese_;
     private PExpressaoAritmetica _expressaoAritmetica_;
+    private TDParentese _dParentese_;
 
-    public AMenosExpressaoAritmetica()
+    public AParenteseAritmeticaFatorAritmetico()
     {
         // Constructor
     }
 
-    public AMenosExpressaoAritmetica(
-        @SuppressWarnings("hiding") TMenos _menos_,
-        @SuppressWarnings("hiding") PExpressaoAritmetica _expressaoAritmetica_)
+    public AParenteseAritmeticaFatorAritmetico(
+        @SuppressWarnings("hiding") TEParentese _eParentese_,
+        @SuppressWarnings("hiding") PExpressaoAritmetica _expressaoAritmetica_,
+        @SuppressWarnings("hiding") TDParentese _dParentese_)
     {
         // Constructor
-        setMenos(_menos_);
+        setEParentese(_eParentese_);
 
         setExpressaoAritmetica(_expressaoAritmetica_);
+
+        setDParentese(_dParentese_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AMenosExpressaoAritmetica(
-            cloneNode(this._menos_),
-            cloneNode(this._expressaoAritmetica_));
+        return new AParenteseAritmeticaFatorAritmetico(
+            cloneNode(this._eParentese_),
+            cloneNode(this._expressaoAritmetica_),
+            cloneNode(this._dParentese_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAMenosExpressaoAritmetica(this);
+        ((Analysis) sw).caseAParenteseAritmeticaFatorAritmetico(this);
     }
 
-    public TMenos getMenos()
+    public TEParentese getEParentese()
     {
-        return this._menos_;
+        return this._eParentese_;
     }
 
-    public void setMenos(TMenos node)
+    public void setEParentese(TEParentese node)
     {
-        if(this._menos_ != null)
+        if(this._eParentese_ != null)
         {
-            this._menos_.parent(null);
+            this._eParentese_.parent(null);
         }
 
         if(node != null)
@@ -62,7 +67,7 @@ public final class AMenosExpressaoAritmetica extends PExpressaoAritmetica
             node.parent(this);
         }
 
-        this._menos_ = node;
+        this._eParentese_ = node;
     }
 
     public PExpressaoAritmetica getExpressaoAritmetica()
@@ -90,27 +95,59 @@ public final class AMenosExpressaoAritmetica extends PExpressaoAritmetica
         this._expressaoAritmetica_ = node;
     }
 
+    public TDParentese getDParentese()
+    {
+        return this._dParentese_;
+    }
+
+    public void setDParentese(TDParentese node)
+    {
+        if(this._dParentese_ != null)
+        {
+            this._dParentese_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._dParentese_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
-            + toString(this._menos_)
-            + toString(this._expressaoAritmetica_);
+            + toString(this._eParentese_)
+            + toString(this._expressaoAritmetica_)
+            + toString(this._dParentese_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._menos_ == child)
+        if(this._eParentese_ == child)
         {
-            this._menos_ = null;
+            this._eParentese_ = null;
             return;
         }
 
         if(this._expressaoAritmetica_ == child)
         {
             this._expressaoAritmetica_ = null;
+            return;
+        }
+
+        if(this._dParentese_ == child)
+        {
+            this._dParentese_ = null;
             return;
         }
 
@@ -121,15 +158,21 @@ public final class AMenosExpressaoAritmetica extends PExpressaoAritmetica
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._menos_ == oldChild)
+        if(this._eParentese_ == oldChild)
         {
-            setMenos((TMenos) newChild);
+            setEParentese((TEParentese) newChild);
             return;
         }
 
         if(this._expressaoAritmetica_ == oldChild)
         {
             setExpressaoAritmetica((PExpressaoAritmetica) newChild);
+            return;
+        }
+
+        if(this._dParentese_ == oldChild)
+        {
+            setDParentese((TDParentese) newChild);
             return;
         }
 

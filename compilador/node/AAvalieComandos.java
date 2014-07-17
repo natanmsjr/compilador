@@ -10,7 +10,7 @@ public final class AAvalieComandos extends PComandos
 {
     private TAvalie _avalie_;
     private TEParentese _eParentese_;
-    private PExpressaoLogica _expressaoLogica_;
+    private PExpressaoAritmetica _expressaoAritmetica_;
     private TDParentese _dParentese_;
     private final LinkedList<PPCaso> _pCaso_ = new LinkedList<PPCaso>();
     private PSenaoPCaso _senaoPCaso_;
@@ -25,7 +25,7 @@ public final class AAvalieComandos extends PComandos
     public AAvalieComandos(
         @SuppressWarnings("hiding") TAvalie _avalie_,
         @SuppressWarnings("hiding") TEParentese _eParentese_,
-        @SuppressWarnings("hiding") PExpressaoLogica _expressaoLogica_,
+        @SuppressWarnings("hiding") PExpressaoAritmetica _expressaoAritmetica_,
         @SuppressWarnings("hiding") TDParentese _dParentese_,
         @SuppressWarnings("hiding") List<?> _pCaso_,
         @SuppressWarnings("hiding") PSenaoPCaso _senaoPCaso_,
@@ -37,7 +37,7 @@ public final class AAvalieComandos extends PComandos
 
         setEParentese(_eParentese_);
 
-        setExpressaoLogica(_expressaoLogica_);
+        setExpressaoAritmetica(_expressaoAritmetica_);
 
         setDParentese(_dParentese_);
 
@@ -57,7 +57,7 @@ public final class AAvalieComandos extends PComandos
         return new AAvalieComandos(
             cloneNode(this._avalie_),
             cloneNode(this._eParentese_),
-            cloneNode(this._expressaoLogica_),
+            cloneNode(this._expressaoAritmetica_),
             cloneNode(this._dParentese_),
             cloneList(this._pCaso_),
             cloneNode(this._senaoPCaso_),
@@ -121,16 +121,16 @@ public final class AAvalieComandos extends PComandos
         this._eParentese_ = node;
     }
 
-    public PExpressaoLogica getExpressaoLogica()
+    public PExpressaoAritmetica getExpressaoAritmetica()
     {
-        return this._expressaoLogica_;
+        return this._expressaoAritmetica_;
     }
 
-    public void setExpressaoLogica(PExpressaoLogica node)
+    public void setExpressaoAritmetica(PExpressaoAritmetica node)
     {
-        if(this._expressaoLogica_ != null)
+        if(this._expressaoAritmetica_ != null)
         {
-            this._expressaoLogica_.parent(null);
+            this._expressaoAritmetica_.parent(null);
         }
 
         if(node != null)
@@ -143,7 +143,7 @@ public final class AAvalieComandos extends PComandos
             node.parent(this);
         }
 
-        this._expressaoLogica_ = node;
+        this._expressaoAritmetica_ = node;
     }
 
     public TDParentese getDParentese()
@@ -278,7 +278,7 @@ public final class AAvalieComandos extends PComandos
         return ""
             + toString(this._avalie_)
             + toString(this._eParentese_)
-            + toString(this._expressaoLogica_)
+            + toString(this._expressaoAritmetica_)
             + toString(this._dParentese_)
             + toString(this._pCaso_)
             + toString(this._senaoPCaso_)
@@ -302,9 +302,9 @@ public final class AAvalieComandos extends PComandos
             return;
         }
 
-        if(this._expressaoLogica_ == child)
+        if(this._expressaoAritmetica_ == child)
         {
-            this._expressaoLogica_ = null;
+            this._expressaoAritmetica_ = null;
             return;
         }
 
@@ -356,9 +356,9 @@ public final class AAvalieComandos extends PComandos
             return;
         }
 
-        if(this._expressaoLogica_ == oldChild)
+        if(this._expressaoAritmetica_ == oldChild)
         {
-            setExpressaoLogica((PExpressaoLogica) newChild);
+            setExpressaoAritmetica((PExpressaoAritmetica) newChild);
             return;
         }
 

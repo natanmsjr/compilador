@@ -5,46 +5,46 @@ package compilador.node;
 import compilador.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ATermoExpressaoAritmetica extends PExpressaoAritmetica
+public final class AValorFatorAritmetico extends PFatorAritmetico
 {
-    private PTermoAritmetico _termoAritmetico_;
+    private PValor _valor_;
 
-    public ATermoExpressaoAritmetica()
+    public AValorFatorAritmetico()
     {
         // Constructor
     }
 
-    public ATermoExpressaoAritmetica(
-        @SuppressWarnings("hiding") PTermoAritmetico _termoAritmetico_)
+    public AValorFatorAritmetico(
+        @SuppressWarnings("hiding") PValor _valor_)
     {
         // Constructor
-        setTermoAritmetico(_termoAritmetico_);
+        setValor(_valor_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ATermoExpressaoAritmetica(
-            cloneNode(this._termoAritmetico_));
+        return new AValorFatorAritmetico(
+            cloneNode(this._valor_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseATermoExpressaoAritmetica(this);
+        ((Analysis) sw).caseAValorFatorAritmetico(this);
     }
 
-    public PTermoAritmetico getTermoAritmetico()
+    public PValor getValor()
     {
-        return this._termoAritmetico_;
+        return this._valor_;
     }
 
-    public void setTermoAritmetico(PTermoAritmetico node)
+    public void setValor(PValor node)
     {
-        if(this._termoAritmetico_ != null)
+        if(this._valor_ != null)
         {
-            this._termoAritmetico_.parent(null);
+            this._valor_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ATermoExpressaoAritmetica extends PExpressaoAritmetica
             node.parent(this);
         }
 
-        this._termoAritmetico_ = node;
+        this._valor_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._termoAritmetico_);
+            + toString(this._valor_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._termoAritmetico_ == child)
+        if(this._valor_ == child)
         {
-            this._termoAritmetico_ = null;
+            this._valor_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ATermoExpressaoAritmetica extends PExpressaoAritmetica
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._termoAritmetico_ == oldChild)
+        if(this._valor_ == oldChild)
         {
-            setTermoAritmetico((PTermoAritmetico) newChild);
+            setValor((PValor) newChild);
             return;
         }
 

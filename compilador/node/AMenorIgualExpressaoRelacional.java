@@ -7,9 +7,9 @@ import compilador.analysis.*;
 @SuppressWarnings("nls")
 public final class AMenorIgualExpressaoRelacional extends PExpressaoRelacional
 {
-    private PExpressaoAritmetica _expressaoAritmetica_;
+    private PExpressaoAritmetica _esquerda_;
     private TMenorIgual _menorIgual_;
-    private PExpressaoRelacional _expressaoRelacional_;
+    private PExpressaoAritmetica _direita_;
 
     public AMenorIgualExpressaoRelacional()
     {
@@ -17,16 +17,16 @@ public final class AMenorIgualExpressaoRelacional extends PExpressaoRelacional
     }
 
     public AMenorIgualExpressaoRelacional(
-        @SuppressWarnings("hiding") PExpressaoAritmetica _expressaoAritmetica_,
+        @SuppressWarnings("hiding") PExpressaoAritmetica _esquerda_,
         @SuppressWarnings("hiding") TMenorIgual _menorIgual_,
-        @SuppressWarnings("hiding") PExpressaoRelacional _expressaoRelacional_)
+        @SuppressWarnings("hiding") PExpressaoAritmetica _direita_)
     {
         // Constructor
-        setExpressaoAritmetica(_expressaoAritmetica_);
+        setEsquerda(_esquerda_);
 
         setMenorIgual(_menorIgual_);
 
-        setExpressaoRelacional(_expressaoRelacional_);
+        setDireita(_direita_);
 
     }
 
@@ -34,9 +34,9 @@ public final class AMenorIgualExpressaoRelacional extends PExpressaoRelacional
     public Object clone()
     {
         return new AMenorIgualExpressaoRelacional(
-            cloneNode(this._expressaoAritmetica_),
+            cloneNode(this._esquerda_),
             cloneNode(this._menorIgual_),
-            cloneNode(this._expressaoRelacional_));
+            cloneNode(this._direita_));
     }
 
     @Override
@@ -45,16 +45,16 @@ public final class AMenorIgualExpressaoRelacional extends PExpressaoRelacional
         ((Analysis) sw).caseAMenorIgualExpressaoRelacional(this);
     }
 
-    public PExpressaoAritmetica getExpressaoAritmetica()
+    public PExpressaoAritmetica getEsquerda()
     {
-        return this._expressaoAritmetica_;
+        return this._esquerda_;
     }
 
-    public void setExpressaoAritmetica(PExpressaoAritmetica node)
+    public void setEsquerda(PExpressaoAritmetica node)
     {
-        if(this._expressaoAritmetica_ != null)
+        if(this._esquerda_ != null)
         {
-            this._expressaoAritmetica_.parent(null);
+            this._esquerda_.parent(null);
         }
 
         if(node != null)
@@ -67,7 +67,7 @@ public final class AMenorIgualExpressaoRelacional extends PExpressaoRelacional
             node.parent(this);
         }
 
-        this._expressaoAritmetica_ = node;
+        this._esquerda_ = node;
     }
 
     public TMenorIgual getMenorIgual()
@@ -95,16 +95,16 @@ public final class AMenorIgualExpressaoRelacional extends PExpressaoRelacional
         this._menorIgual_ = node;
     }
 
-    public PExpressaoRelacional getExpressaoRelacional()
+    public PExpressaoAritmetica getDireita()
     {
-        return this._expressaoRelacional_;
+        return this._direita_;
     }
 
-    public void setExpressaoRelacional(PExpressaoRelacional node)
+    public void setDireita(PExpressaoAritmetica node)
     {
-        if(this._expressaoRelacional_ != null)
+        if(this._direita_ != null)
         {
-            this._expressaoRelacional_.parent(null);
+            this._direita_.parent(null);
         }
 
         if(node != null)
@@ -117,25 +117,25 @@ public final class AMenorIgualExpressaoRelacional extends PExpressaoRelacional
             node.parent(this);
         }
 
-        this._expressaoRelacional_ = node;
+        this._direita_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._expressaoAritmetica_)
+            + toString(this._esquerda_)
             + toString(this._menorIgual_)
-            + toString(this._expressaoRelacional_);
+            + toString(this._direita_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._expressaoAritmetica_ == child)
+        if(this._esquerda_ == child)
         {
-            this._expressaoAritmetica_ = null;
+            this._esquerda_ = null;
             return;
         }
 
@@ -145,9 +145,9 @@ public final class AMenorIgualExpressaoRelacional extends PExpressaoRelacional
             return;
         }
 
-        if(this._expressaoRelacional_ == child)
+        if(this._direita_ == child)
         {
-            this._expressaoRelacional_ = null;
+            this._direita_ = null;
             return;
         }
 
@@ -158,9 +158,9 @@ public final class AMenorIgualExpressaoRelacional extends PExpressaoRelacional
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._expressaoAritmetica_ == oldChild)
+        if(this._esquerda_ == oldChild)
         {
-            setExpressaoAritmetica((PExpressaoAritmetica) newChild);
+            setEsquerda((PExpressaoAritmetica) newChild);
             return;
         }
 
@@ -170,9 +170,9 @@ public final class AMenorIgualExpressaoRelacional extends PExpressaoRelacional
             return;
         }
 
-        if(this._expressaoRelacional_ == oldChild)
+        if(this._direita_ == oldChild)
         {
-            setExpressaoRelacional((PExpressaoRelacional) newChild);
+            setDireita((PExpressaoAritmetica) newChild);
             return;
         }
 

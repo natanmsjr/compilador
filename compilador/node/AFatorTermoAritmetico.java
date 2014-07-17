@@ -5,46 +5,46 @@ package compilador.node;
 import compilador.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ATermoExpressaoAritmetica extends PExpressaoAritmetica
+public final class AFatorTermoAritmetico extends PTermoAritmetico
 {
-    private PTermoAritmetico _termoAritmetico_;
+    private PFatorAritmetico _fatorAritmetico_;
 
-    public ATermoExpressaoAritmetica()
+    public AFatorTermoAritmetico()
     {
         // Constructor
     }
 
-    public ATermoExpressaoAritmetica(
-        @SuppressWarnings("hiding") PTermoAritmetico _termoAritmetico_)
+    public AFatorTermoAritmetico(
+        @SuppressWarnings("hiding") PFatorAritmetico _fatorAritmetico_)
     {
         // Constructor
-        setTermoAritmetico(_termoAritmetico_);
+        setFatorAritmetico(_fatorAritmetico_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ATermoExpressaoAritmetica(
-            cloneNode(this._termoAritmetico_));
+        return new AFatorTermoAritmetico(
+            cloneNode(this._fatorAritmetico_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseATermoExpressaoAritmetica(this);
+        ((Analysis) sw).caseAFatorTermoAritmetico(this);
     }
 
-    public PTermoAritmetico getTermoAritmetico()
+    public PFatorAritmetico getFatorAritmetico()
     {
-        return this._termoAritmetico_;
+        return this._fatorAritmetico_;
     }
 
-    public void setTermoAritmetico(PTermoAritmetico node)
+    public void setFatorAritmetico(PFatorAritmetico node)
     {
-        if(this._termoAritmetico_ != null)
+        if(this._fatorAritmetico_ != null)
         {
-            this._termoAritmetico_.parent(null);
+            this._fatorAritmetico_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ATermoExpressaoAritmetica extends PExpressaoAritmetica
             node.parent(this);
         }
 
-        this._termoAritmetico_ = node;
+        this._fatorAritmetico_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._termoAritmetico_);
+            + toString(this._fatorAritmetico_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._termoAritmetico_ == child)
+        if(this._fatorAritmetico_ == child)
         {
-            this._termoAritmetico_ = null;
+            this._fatorAritmetico_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ATermoExpressaoAritmetica extends PExpressaoAritmetica
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._termoAritmetico_ == oldChild)
+        if(this._fatorAritmetico_ == oldChild)
         {
-            setTermoAritmetico((PTermoAritmetico) newChild);
+            setFatorAritmetico((PFatorAritmetico) newChild);
             return;
         }
 

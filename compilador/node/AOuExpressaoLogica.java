@@ -7,7 +7,7 @@ import compilador.analysis.*;
 @SuppressWarnings("nls")
 public final class AOuExpressaoLogica extends PExpressaoLogica
 {
-    private PExpressaoRelacional _expressaoRelacional_;
+    private PTermoLogico _termoLogico_;
     private TOu _ou_;
     private PExpressaoLogica _expressaoLogica_;
 
@@ -17,12 +17,12 @@ public final class AOuExpressaoLogica extends PExpressaoLogica
     }
 
     public AOuExpressaoLogica(
-        @SuppressWarnings("hiding") PExpressaoRelacional _expressaoRelacional_,
+        @SuppressWarnings("hiding") PTermoLogico _termoLogico_,
         @SuppressWarnings("hiding") TOu _ou_,
         @SuppressWarnings("hiding") PExpressaoLogica _expressaoLogica_)
     {
         // Constructor
-        setExpressaoRelacional(_expressaoRelacional_);
+        setTermoLogico(_termoLogico_);
 
         setOu(_ou_);
 
@@ -34,7 +34,7 @@ public final class AOuExpressaoLogica extends PExpressaoLogica
     public Object clone()
     {
         return new AOuExpressaoLogica(
-            cloneNode(this._expressaoRelacional_),
+            cloneNode(this._termoLogico_),
             cloneNode(this._ou_),
             cloneNode(this._expressaoLogica_));
     }
@@ -45,16 +45,16 @@ public final class AOuExpressaoLogica extends PExpressaoLogica
         ((Analysis) sw).caseAOuExpressaoLogica(this);
     }
 
-    public PExpressaoRelacional getExpressaoRelacional()
+    public PTermoLogico getTermoLogico()
     {
-        return this._expressaoRelacional_;
+        return this._termoLogico_;
     }
 
-    public void setExpressaoRelacional(PExpressaoRelacional node)
+    public void setTermoLogico(PTermoLogico node)
     {
-        if(this._expressaoRelacional_ != null)
+        if(this._termoLogico_ != null)
         {
-            this._expressaoRelacional_.parent(null);
+            this._termoLogico_.parent(null);
         }
 
         if(node != null)
@@ -67,7 +67,7 @@ public final class AOuExpressaoLogica extends PExpressaoLogica
             node.parent(this);
         }
 
-        this._expressaoRelacional_ = node;
+        this._termoLogico_ = node;
     }
 
     public TOu getOu()
@@ -124,7 +124,7 @@ public final class AOuExpressaoLogica extends PExpressaoLogica
     public String toString()
     {
         return ""
-            + toString(this._expressaoRelacional_)
+            + toString(this._termoLogico_)
             + toString(this._ou_)
             + toString(this._expressaoLogica_);
     }
@@ -133,9 +133,9 @@ public final class AOuExpressaoLogica extends PExpressaoLogica
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._expressaoRelacional_ == child)
+        if(this._termoLogico_ == child)
         {
-            this._expressaoRelacional_ = null;
+            this._termoLogico_ = null;
             return;
         }
 
@@ -158,9 +158,9 @@ public final class AOuExpressaoLogica extends PExpressaoLogica
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._expressaoRelacional_ == oldChild)
+        if(this._termoLogico_ == oldChild)
         {
-            setExpressaoRelacional((PExpressaoRelacional) newChild);
+            setTermoLogico((PTermoLogico) newChild);
             return;
         }
 

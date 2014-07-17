@@ -5,26 +5,26 @@ package compilador.node;
 import compilador.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ADiferenteExpressaoRelacional extends PExpressaoRelacional
+public final class ASubtracaoExpressaoAritmetica extends PExpressaoAritmetica
 {
-    private PExpressaoAritmetica _esquerda_;
-    private TDiferente _direita_;
+    private PTermoAritmetico _termoAritmetico_;
+    private TMenos _menos_;
     private PExpressaoAritmetica _expressaoAritmetica_;
 
-    public ADiferenteExpressaoRelacional()
+    public ASubtracaoExpressaoAritmetica()
     {
         // Constructor
     }
 
-    public ADiferenteExpressaoRelacional(
-        @SuppressWarnings("hiding") PExpressaoAritmetica _esquerda_,
-        @SuppressWarnings("hiding") TDiferente _direita_,
+    public ASubtracaoExpressaoAritmetica(
+        @SuppressWarnings("hiding") PTermoAritmetico _termoAritmetico_,
+        @SuppressWarnings("hiding") TMenos _menos_,
         @SuppressWarnings("hiding") PExpressaoAritmetica _expressaoAritmetica_)
     {
         // Constructor
-        setEsquerda(_esquerda_);
+        setTermoAritmetico(_termoAritmetico_);
 
-        setDireita(_direita_);
+        setMenos(_menos_);
 
         setExpressaoAritmetica(_expressaoAritmetica_);
 
@@ -33,28 +33,28 @@ public final class ADiferenteExpressaoRelacional extends PExpressaoRelacional
     @Override
     public Object clone()
     {
-        return new ADiferenteExpressaoRelacional(
-            cloneNode(this._esquerda_),
-            cloneNode(this._direita_),
+        return new ASubtracaoExpressaoAritmetica(
+            cloneNode(this._termoAritmetico_),
+            cloneNode(this._menos_),
             cloneNode(this._expressaoAritmetica_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseADiferenteExpressaoRelacional(this);
+        ((Analysis) sw).caseASubtracaoExpressaoAritmetica(this);
     }
 
-    public PExpressaoAritmetica getEsquerda()
+    public PTermoAritmetico getTermoAritmetico()
     {
-        return this._esquerda_;
+        return this._termoAritmetico_;
     }
 
-    public void setEsquerda(PExpressaoAritmetica node)
+    public void setTermoAritmetico(PTermoAritmetico node)
     {
-        if(this._esquerda_ != null)
+        if(this._termoAritmetico_ != null)
         {
-            this._esquerda_.parent(null);
+            this._termoAritmetico_.parent(null);
         }
 
         if(node != null)
@@ -67,19 +67,19 @@ public final class ADiferenteExpressaoRelacional extends PExpressaoRelacional
             node.parent(this);
         }
 
-        this._esquerda_ = node;
+        this._termoAritmetico_ = node;
     }
 
-    public TDiferente getDireita()
+    public TMenos getMenos()
     {
-        return this._direita_;
+        return this._menos_;
     }
 
-    public void setDireita(TDiferente node)
+    public void setMenos(TMenos node)
     {
-        if(this._direita_ != null)
+        if(this._menos_ != null)
         {
-            this._direita_.parent(null);
+            this._menos_.parent(null);
         }
 
         if(node != null)
@@ -92,7 +92,7 @@ public final class ADiferenteExpressaoRelacional extends PExpressaoRelacional
             node.parent(this);
         }
 
-        this._direita_ = node;
+        this._menos_ = node;
     }
 
     public PExpressaoAritmetica getExpressaoAritmetica()
@@ -124,8 +124,8 @@ public final class ADiferenteExpressaoRelacional extends PExpressaoRelacional
     public String toString()
     {
         return ""
-            + toString(this._esquerda_)
-            + toString(this._direita_)
+            + toString(this._termoAritmetico_)
+            + toString(this._menos_)
             + toString(this._expressaoAritmetica_);
     }
 
@@ -133,15 +133,15 @@ public final class ADiferenteExpressaoRelacional extends PExpressaoRelacional
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._esquerda_ == child)
+        if(this._termoAritmetico_ == child)
         {
-            this._esquerda_ = null;
+            this._termoAritmetico_ = null;
             return;
         }
 
-        if(this._direita_ == child)
+        if(this._menos_ == child)
         {
-            this._direita_ = null;
+            this._menos_ = null;
             return;
         }
 
@@ -158,15 +158,15 @@ public final class ADiferenteExpressaoRelacional extends PExpressaoRelacional
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._esquerda_ == oldChild)
+        if(this._termoAritmetico_ == oldChild)
         {
-            setEsquerda((PExpressaoAritmetica) newChild);
+            setTermoAritmetico((PTermoAritmetico) newChild);
             return;
         }
 
-        if(this._direita_ == oldChild)
+        if(this._menos_ == oldChild)
         {
-            setDireita((TDiferente) newChild);
+            setMenos((TMenos) newChild);
             return;
         }
 
