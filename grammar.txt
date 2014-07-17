@@ -1,23 +1,23 @@
-//EspecificaÃ§Ã£o da GramÃ¡tica para o Projeto de Compiladores
-//Grupo: 	JAIR KLEYTON DA SILVA NUNES
-//	 	NATANAEL MACEDO DA SILVA JUNIOR
+//	Especificação da Gramática para o Projeto de Compiladores
+//	Grupo: 	JAIR KLEYTON DA SILVA NUNES
+//	 		NATANAEL MACEDO DA SILVA JUNIOR
 
 Package compilador;
 
 Helpers
-	todos 			= [' ' + [39 .. 127]];
-	minusculas		= ['a' .. 'z'];
-	maiusculas 		= ['A' .. 'Z'];
-	letra			= minusculas | maiusculas;
-	digito			= ['0' .. '9'];
-	inteiro			= '-'? digito+;
-	real 			= '-'? digito? '.' digito+;
-	tab			= 9;
-	lf			= 10; // Line Feed
-	cr 			= 13; // Carriage Return
-	caractere 		= letra | digito | [todos - [cr + lf]];
-	eol			= cr | lf | cr lf;	
-	comentario_linha	= '//' todos* eol;
+	todos 					= [' ' + [39 .. 127]];
+	minusculas				= ['a' .. 'z'];
+	maiusculas 				= ['A' .. 'Z'];
+	letra					= minusculas | maiusculas;
+	digito					= ['0' .. '9'];
+	inteiro					= '-'? digito+;
+	real 					= '-'? digito? '.' digito+;
+	tab						= 9;
+	lf						= 10; // Line Feed
+	cr 						= 13; // Carriage Return
+	caractere 				= letra | digito | [todos - [cr + lf]];
+	eol						= cr | lf | cr lf;	
+	comentario_linha		= '//' todos* eol;
 
 States
 	normal,
@@ -26,94 +26,89 @@ States
 Tokens
 	
 	// separadores
-	{normal} ponto		= '.';
+	{normal} ponto			= '.';
 	{normal} dois_pontos	= ':';
-	{normal} virgula 	= ',';
+	{normal} virgula 		= ',';
 	{normal} ponto_virgula	= ';';
-	{normal} barra		= '|';
+	{normal} barra			= '|';
 	{normal} e_parentese 	= '(';
 	{normal} d_parentese 	= ')';
 	{normal} e_colchete 	= '[';
 	{normal} d_colchete 	= ']';
-	{normal} e_chave 	= '{';
-	{normal} d_chave	= '}';
+	{normal} e_chave 		= '{';
+	{normal} d_chave	 	= '}';
 		
 	// operadores
-	{normal} mais 		= '+';
-	{normal} menos 		= '-';
+	{normal} mais 			= '+';
+	{normal} menos 			= '-';
 	{normal} multiplicacao 	= '*';
-	{normal} divisao 	= '/';
-	{normal} atribuicao	= '<-';
+	{normal} divisao 		= '/';
+	{normal} atribuicao		= '<-';
 	
-	{normal} igual 		= '=';
-	{normal} diferente 	= '<>';	
-	{normal} maior_q	= '>';
-	{normal} menor_q 	= '<';
+	{normal} igual 			= '=';
+	{normal} diferente 		= '<>';	
+	{normal} maior_q		= '>';
+	{normal} menor_q 		= '<';
 	{normal} maior_igual	= '>=';
 	{normal} menor_igual	= '<=';
 		
-	{normal} e		= 'e';
-	{normal} ou		= 'ou';
-	{normal} nao		= 'nao';
-	{normal} eou     	= 'eou';
+	{normal} e				= 'e';
+	{normal} ou				= 'ou';
+	{normal} nao			= 'nao';
+	{normal} eou     		= 'eou';
 		
 	// palavras reservadas
-	{normal} programa 	= 'programa';
-	{normal} inicio 	= 'inicio';
-	{normal} fim 		= 'fim.';
+	{normal} programa 		= 'programa';
+	{normal} inicio 		= 'inicio';
+	{normal} fim 			= 'fim.';
 	
-	{normal} inteiro	= 'inteiro';
-	{normal} real		= 'real';
-	{normal} caractere	= 'caractere';
+	{normal} inteiro 		= 'inteiro';
+	{normal} real			= 'real';
+	{normal} caractere 		= 'caractere';
 	
-	{normal} escreva 	= 'escreva';
-	{normal} leia		= 'leia';
+	{normal} escreva 		= 'escreva';
+	{normal} leia			= 'leia';
+		
+	{normal} se 			= 'se';
+	{normal} entao 			= 'entao';
+	{normal} senao 			= 'senao';
+	{normal} fim_se			= 'fim se';
 	
-	{normal} se 		= 'se';
-	{normal} entao 		= 'entao';
-	{normal} senao 		= 'senao';
-	{normal} fim_se		= 'fim se';
-	
-	{normal} enquanto 	= 'enquanto';
-	{normal} faca 		= 'faca';
+	{normal} enquanto 		= 'enquanto';
+	{normal} faca 			= 'faca';
 	{normal} fim_enquanto 	= 'fim enquanto';
 	
-	{normal} para 		= 'para';
-	{normal} de		= 'de';
-	{normal} passo		= 'passo';	
-	{normal} fim_para 	= 'fim para';
+	{normal} para 			= 'para';
+	{normal} de				= 'de';
+	{normal} passo			= 'passo';	
+	{normal} fim_para 		= 'fim para';	
 	
-	{normal} avalie 	= 'avalie';
-	{normal} caso 		= 'caso';
-	{normal} fim_avalie	= 'fim avalie';
+	{normal} avalie 		= 'avalie';
+	{normal} caso 			= 'caso';
+	{normal} fim_avalie		= 'fim avalie';
 	
-	{normal} repita 	= 'repita';
-	{normal} ate 		= 'ate';
-	{normal} fim_repita	= 'fim repita';
-	{normal} interromper	= 'interromper';
-	
-	{normal} retorne 	= 'retorne';
-	{normal} pacote		= 'pacote';
-	{normal} nulo		= 'nulo';
+	{normal} repita 		= 'repita';
+	{normal} ate 			= 'ate';
+	{normal} fim_repita		= 'fim repita';
 	
 	// identificadores
-	{normal} id		= (letra | '_')(letra | digito | '_')*;
-	{normal} numero		= inteiro;
+	{normal} id				= (letra | '_')(letra | digito | '_')*;
+	{normal} numero			= inteiro;
 	{normal} numero_real	= real;
-	{normal} string		= ''' caractere* ''';
-	{normal} constante	= 'constante';
-	{normal} tipo	 	= inteiro | real | caractere;
-		
-	// espaÃ§o em braco e comentarios	
-	{normal} blank 		= (' ' | tab | eol )+;
-	{normal} comentario	= comentario_linha;
+	{normal} string			= ''' caractere* ''';
+	{normal} constante		= 'constante';
+	{normal} tipo	 		= inteiro | real | caractere;
+			
+	// espaço em braco e comentarios	
+	{normal} blank 			= (' ' | tab | eol )+;
+	{normal} comentario		= comentario_linha;
 	
 	{normal -> comment, comment} comentario_aninhado = '/*';
-	{comment} comentario_aninhado_fim = '*/';
+	{comment} comentario_aninhado_fim 	= '*/';
 	{comment} comentario_aninhado_corpo = [todos - ['*' + '/']]*;
-	{comment} estrela = '*';
-	{comment} barra_inclinada = '/';	
-	{comment} comentario_linha = comentario_linha;
+	{comment} estrela 					= '*';
+	{comment} barra_inclinada 					= '/';	
+	{comment} comentario_linha 			= comentario_linha;
 	
 Ignored Tokens
 	blank,
@@ -121,99 +116,62 @@ Ignored Tokens
 	comentario_aninhado;
 	
 Productions
-	algoritmo	= programa id inicio declaracao? comandos* fim;
+	algoritmo = programa id inicio declaracao? comandos* fim;
 	
-	declaracao	= declaracao? tipo dois_pontos variavel ponto_virgula;
+	declaracao = declaracao? tipo dois_pontos variavel ponto_virgula;
 	
-	var		= {variavel} variavel var_virgula*;
+	var = {variavel} variavel var_virgula*;
 	
 	var_virgula	= virgula variavel;
 	
-	variavel	= {id} id
-			| {vetor} id e_colchete numero d_colchete;
+	variavel = {id} id
+	| {vetor} id e_colchete numero d_colchete;
 	
-	valor 		= {numero} numero
-			| {numero_real} numero_real
-			| {string} string;
-
-	comandos	= {atribuicao} var atribuicao expressao_aritmetica ponto_virgula
-			| {leia} leia e_parentese var d_parentese ponto_virgula
-			| {escreva} escreva e_parentese expressao_aritmetica d_parentese ponto_virgula
-			| {se} se e_parentese expressao_logica d_parentese entao comandos* senao_se? fim_se ponto_virgula 
-			| {avalie} avalie e_parentese expressao_logica d_parentese p_caso* senao_p_caso? fim_avalie ponto_virgula
-			| {enquanto} enquanto e_parentese expressao_logica d_parentese faca comandos* fim_enquanto ponto_virgula
-			| {repita} repita comandos* ate e_parentese expressao_logica d_parentese ponto_virgula
-			| {para} para var de [inicio]:numero ate [fim]:numero faca comandos* fim_para ponto_virgula
-			| {para_passo} para var de [inicio]:numero passo [passos]:numero ate [fim]:numero faca comandos* fim_para ponto_virgula;
+	valor = {numero} numero
+	| {numero_real} numero_real
+	| {string} string;
 	
-	senao_se 	= {senao_se} senao comandos*;
+	comandos = {atribuicao} var atribuicao expressao_aritmetica ponto_virgula
+	| {leia} leia e_parentese var d_parentese ponto_virgula
+	| {escreva} escreva e_parentese expressao_aritmetica d_parentese ponto_virgula
+	| {se} se e_parentese expressao_logica d_parentese entao comandos+ senao_se? fim_se ponto_virgula
+	| {avalie} avalie e_parentese expressao_aritmetica d_parentese p_caso* senao_p_caso? fim_avalie ponto_virgula
+	| {enquanto} enquanto e_parentese expressao_logica d_parentese faca comandos* fim_enquanto ponto_virgula
+	| {repita} repita comandos+ ate e_parentese expressao_logica d_parentese ponto_virgula
+	| {para} para var de [inicio]:numero ate [fim]:numero faca comandos+ fim_para ponto_virgula
+	| {para_passo} para var de [inicio]:numero passo [passos]:numero ate [fim]:numero faca comandos+ fim_para ponto_virgula;
+					
+	senao_se = {senao_se} senao comandos*;
 	
-	p_caso		= {caso} valor dois_pontos comandos*;
+	p_caso = {caso} caso valor dois_pontos comandos*;
 	
-	senao_p_caso	= {senao_caso} senao dois_pontos comandos*;
-	
-	exp		= {exp} expressao_logica exp_virgula*;
-	
-	exp_virgula	= virgula expressao_logica;
-	
-	expressao_logica	= {logica} e_parentese expressao_logica d_parentese
-				| {e} expressao_relacional e expressao_logica
-				| {ou} expressao_relacional ou expressao_logica
-				| {eou} expressao_relacional eou expressao_logica
-				| {nao} nao? expressao_logica
-				| {relacional} expressao_relacional;
-	
-	expressao_relacional	= {igual} expressao_aritmetica igual expressao_relacional
-				| {maior_igual} expressao_aritmetica maior_igual expressao_relacional
-				| {menor_igual} expressao_aritmetica menor_igual expressao_relacional
-				| {diferente} expressao_aritmetica diferente expressao_relacional 
-				| {maior_q} expressao_aritmetica maior_q expressao_relacional
-				| {manor_q} expressao_aritmetica menor_q expressao_relacional							
-				| {expressoes} expressao_aritmetica;
-	
-	
-	expressao_aritmetica	= {nao} menos expressao_aritmetica
-				| {mais} termo mais expressao_aritmetica
-				| {menos} termo menos expressao_aritmetica
-				| {termo} termo;
-
-	termo 			= {multiplicacao} fator multiplicacao termo
-				| {divisao} fator divisao termo
-				| {fator} fator;
-				
-	fator 			= {expressao} e_parentese expressao_aritmetica d_parentese
-				| {variavel} variavel
-				| {valor} valor;
-
-	/* Outra tentativa de precedÃªncia
-	exp			= expressao exp_virgula*;
-	
-	exp_virgula		= virgula expressao;
-	
-	expressao		= {mais} termo mais expressao
-				| {menos} termo menos expressao
-				| {nao} menos expressao
-				| {termo} termo;
-
-	termo 			= {multiplicacao} fator multiplicacao termo
-				| {divisao} fator divisao termo
-				| {fator} fator;
-
-	fator 			= {expressao} e_parentese expressao d_parentese
-				| {variavel} variavel
-				| {valor} valor;
+	senao_p_caso = {senao_caso} senao dois_pontos comandos*;
 						
-	expressao_logica	= {logica} e_parentese expressao_logica d_parentese
-				| {e} expressao_relacional e expressao_logica
-				| {ou} expressao_relacional ou expressao_logica
-				| {eou} expressao_relacional eou expressao_logica
-				| {nao} nao? expressao_logica
-				| {relacional} expressao_relacional;
+	expressao_logica = {e} termo_logico e expressao_logica
+	| {ou} termo_logico ou expressao_logica
+	| {eou} termo_logico eou expressao_logica
+	| {nao} nao expressao_logica
+	| {termo} termo_logico;
+						
+	termo_logico = {parentese_logica} e_parentese expressao_logica d_parentese
+	| {relacional} expressao_relacional;
 	
-	expressao_relacional	= {maior_igual} expressao maior_igual expressao_relacional
-				| {menor_igual} expressao menor_igual expressao_relacional 
-				| {diferente} expressao diferente expressao_relacional
-				| {maior_q} expressao maior_q expressao_relacional
-				| {manor_q} expressao menor_q expressao_relacional
-				| {igual} expressao igual expressao_relacional
-				| {expressoes} expressao;*/
+	expressao_relacional = {igual} [esquerda]:expressao_aritmetica igual [direita]:expressao_aritmetica
+	| {diferente} [esquerda]:expressao_aritmetica [direita]:diferente expressao_aritmetica
+	| {maior_q} [esquerda]:expressao_aritmetica maior_q [direita]:expressao_aritmetica
+	| {manor_q} [esquerda]:expressao_aritmetica menor_q [direita]:expressao_aritmetica
+	| {maior_igual} [esquerda]:expressao_aritmetica maior_igual [direita]:expressao_aritmetica
+	| {menor_igual} [esquerda]:expressao_aritmetica menor_igual [direita]:expressao_aritmetica;
+						
+	expressao_aritmetica = {soma} termo_aritmetico mais expressao_aritmetica
+	| {subtracao} termo_aritmetico menos expressao_aritmetica
+	| {menos} menos expressao_aritmetica
+	| {termo} termo_aritmetico;
+
+	termo_aritmetico = {multiplicacao} fator_aritmetico multiplicacao termo_aritmetico
+	| {divisao} fator_aritmetico divisao termo_aritmetico
+	| {fator} fator_aritmetico;
+
+	fator_aritmetico = {parentese_aritmetica} e_parentese expressao_aritmetica d_parentese
+	| {variavel} variavel
+	| {valor} valor;
