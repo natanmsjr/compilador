@@ -106,9 +106,9 @@ Tokens
 	{normal -> comment, comment} comentario_aninhado = '/*';
 	{comment} comentario_aninhado_fim 	= '*/';
 	{comment} comentario_aninhado_corpo = [todos - ['*' + '/']]*;
-	{comment} estrela 					= '*';
-	{comment} barra_inclinada 					= '/';	
-	{comment} comentario_linha 			= comentario_linha;
+	{comment} estrela		  			= '*';
+	{comment} barra_inclinada 			= '/';	
+	{comment} comentario_linha			= comentario_linha;
 	
 Ignored Tokens
 	blank,
@@ -116,62 +116,117 @@ Ignored Tokens
 	comentario_aninhado;
 	
 Productions
-	algoritmo = programa id inicio declaracao? comandos* fim;
+	algoritmo {-> algoritmo} = programa id inicio declaracao* comandos* fim {-> New algoritmo(programa, id, inicio, [declaracao], [comandos], fim)};
 	
-	declaracao = declaracao? tipo dois_pontos variavel ponto_virgula;
+	variavel {-> variavel} = {id} id {-> New variavel.id (id)}
+	| {vetor} id e_colchete numero d_colchete {-> New variavel.vetor (id, e_colchete, numero, d_colchete)};	
 	
-	var = {variavel} variavel var_virgula*;
+	var {-> variavel*} = variavel var_virgula* {-> [variavel, var_virgula.variavel]};
 	
-	var_virgula	= virgula variavel;
+	var_virgula {-> variavel} = virgula variavel {-> variavel};
+		
+	
+	valor {-> valor} = {numero} numero {-> New valor.numero(numero)}
+	| {numero_real} numero_real {-> New valor.numero_real(numero_real)}
+	| {string} string {-> New valor.string(string)};
+	
+						
+	expressao_logica {-> expressao_logica} = {e} termo_logico e expressao_logica {-> New expressao_logica.e(termo_logico.expressao_logica, expressao_logica)}
+	| {ou} termo_logico ou expressao_logica {-> New expressao_logica.ou(termo_logico.expressao_logica, expressao_logica)}
+	| {eou} termo_logico eou expressao_logica {-> New expressao_logica.eou(termo_logico.expressao_logica, expressao_logica)}
+	| {nao} nao expressao_logica {-> New expressao_logica.nao(expressao_logica)}
+	| {termo} termo_logico {-> termo_logico.expressao_logica};
+						
+	termo_logico {-> expressao_logica} = {parentese_logica} e_parentese expressao_logica d_parentese {-> New expressao_logica.parentese_logica(expressao_logica.expressao_logica)} 
+	| {relacional} expressao_relacional {-> expressao_relacional.expressao_logica};
+	
+	expressao_relacional {-> expressao_logica} = {igual} [esquerda]:expressao_aritmetica igual [direita]:expressao_aritmetica {-> New expressao_logica.igual(esquerda.expressao_aritmetica, direita.expressao_aritmetica)}
+	| {diferente} [esquerda]:expressao_aritmetica diferente [direita]:expressao_aritmetica {-> New expressao_logica.diferente(esquerda.expressao_aritmetica, direita.expressao_aritmetica)}
+	| {maior_q} [esquerda]:expressao_aritmetica maior_q [direita]:expressao_aritmetica {-> New expressao_logica.maior_q(esquerda.expressao_aritmetica, direita.expressao_aritmetica)}
+	| {menor_q} [esquerda]:expressao_aritmetica menor_q [direita]:expressao_aritmetica {-> New expressao_logica.menor_q(esquerda.expressao_aritmetica, direita.expressao_aritmetica)}
+	| {maior_igual} [esquerda]:expressao_aritmetica maior_igual [direita]:expressao_aritmetica {-> New expressao_logica.maior_igual(esquerda.expressao_aritmetica, direita.expressao_aritmetica)}
+	| {menor_igual} [esquerda]:expressao_aritmetica menor_igual [direita]:expressao_aritmetica {-> New expressao_logica.menor_igual(esquerda.expressao_aritmetica, direita.expressao_aritmetica)};
+						
+	expressao_aritmetica {-> expressao_aritmetica} = {soma} termo_aritmetico mais expressao_aritmetica {-> New expressao_aritmetica.soma(termo_aritmetico.expressao_aritmetica, expressao_aritmetica)}
+	| {subtracao} termo_aritmetico menos expressao_aritmetica {-> New expressao_aritmetica.subtracao(termo_aritmetico.expressao_aritmetica, expressao_aritmetica)}
+	| {menos} menos expressao_aritmetica {-> New expressao_aritmetica.menos(expressao_aritmetica)}
+	| {termo} termo_aritmetico {-> termo_aritmetico.expressao_aritmetica};
+
+	termo_aritmetico {-> expressao_aritmetica} = {multiplicacao} fator_aritmetico multiplicacao termo_aritmetico {-> New expressao_aritmetica.multiplicacao(fator_aritmetico.expressao_aritmetica, termo_aritmetico.expressao_aritmetica)}
+	| {divisao} fator_aritmetico divisao termo_aritmetico {-> New expressao_aritmetica.divisao(fator_aritmetico.expressao_aritmetica, termo_aritmetico.expressao_aritmetica)}
+	| {fator} fator_aritmetico {-> fator_aritmetico.expressao_aritmetica};
+
+	fator_aritmetico {-> expressao_aritmetica} = {parentese_aritmetica} e_parentese expressao_aritmetica d_parentese {-> New expressao_aritmetica.parentese_aritmetica(expressao_aritmetica.expressao_aritmetica)} 
+	| {variavel} variavel {-> New expressao_aritmetica.variavel(variavel)}
+	| {valor} valor {-> New expressao_aritmetica.valor(valor)};
+	
+	comandos {-> comandos} = {atribuicao} variavel atribuicao expressao_aritmetica ponto_virgula {-> New comandos.atribuicao(variavel, expressao_aritmetica)}
+	//| {leia} leia e_parentese var d_parentese ponto_virgula {-> New comandos.leia(var)}
+	| {escreva} escreva e_parentese expressao_aritmetica d_parentese ponto_virgula {-> New comandos.escreva(expressao_aritmetica)}
+	| {se} se e_parentese expressao_logica d_parentese entao comandos+ senao_se? fim_se ponto_virgula {-> New comandos.se(expressao_logica, [comandos], senao_se)}
+	| {avalie} avalie e_parentese expressao_aritmetica d_parentese p_caso* senao_p_caso? fim_avalie ponto_virgula {-> New comandos.avalie(expressao_aritmetica, comandos, [p_caso], senao_p_caso)}
+	| {enquanto} enquanto e_parentese expressao_logica d_parentese faca comandos+ fim_enquanto ponto_virgula {-> New comandos.enquanto(expressao_logica, comandos)}
+	| {repita} repita comandos+ ate e_parentese expressao_logica d_parentese ponto_virgula {-> New comandos.repita(comandos, expressao_logica)}
+	| {para} para variavel de [inicio]:numero ate [fim]:numero faca comandos+ fim_para ponto_virgula {-> New comandos.para(variavel, inicio.numero, fim.numero, comandos)}
+	| {para_passo} para variavel de [inicio]:numero passo [passos]:numero ate [fim]:numero faca comandos+ fim_para ponto_virgula {-> New comandos.para_passo(variavel, inicio.numero, passos.numero, fim.numero, comandos)};
+					
+	senao_se {-> comandos} = {senao_se} senao comandos+ {-> New comandos.senao_se([comandos])};
+	
+	p_caso {-> comandos} = {caso} caso valor dois_pontos comandos+ {-> New comandos.caso(valor, [comandos])};
+	
+	senao_p_caso {-> comandos} = {senao_caso} senao dois_pontos comandos+ {-> New comandos.senao_p_caso([comandos])};
+	
+	declaracao {-> declaracao} = {declaracao} tipo dois_pontos var ponto_virgula {-> New declaracao.declaracao(tipo, dois_pontos, var, ponto_virgula)};
+	
+	Abstract Syntax Tree
+	algoritmo = programa id inicio declaracao* comandos* fim;	
 	
 	variavel = {id} id
 	| {vetor} id e_colchete numero d_colchete;
+	
+	var = {var} variavel var_virgula*;
+	
+	var_virgula = {virgula} virgula var;
+	
+	declaracao = {declaracao} tipo dois_pontos var ponto_virgula;
 	
 	valor = {numero} numero
 	| {numero_real} numero_real
 	| {string} string;
 	
-	comandos = {atribuicao} var atribuicao expressao_aritmetica ponto_virgula
-	| {leia} leia e_parentese var d_parentese ponto_virgula
-	| {escreva} escreva e_parentese expressao_aritmetica d_parentese ponto_virgula
-	| {se} se e_parentese expressao_logica d_parentese entao comandos+ senao_se? fim_se ponto_virgula
-	| {avalie} avalie e_parentese expressao_aritmetica d_parentese p_caso* senao_p_caso? fim_avalie ponto_virgula
-	| {enquanto} enquanto e_parentese expressao_logica d_parentese faca comandos* fim_enquanto ponto_virgula
-	| {repita} repita comandos+ ate e_parentese expressao_logica d_parentese ponto_virgula
-	| {para} para var de [inicio]:numero ate [fim]:numero faca comandos+ fim_para ponto_virgula
-	| {para_passo} para var de [inicio]:numero passo [passos]:numero ate [fim]:numero faca comandos+ fim_para ponto_virgula;
+	comandos = {atribuicao} variavel expressao_aritmetica
+	| {leia} var
+	| {escreva} expressao_aritmetica
+	| {se} expressao_logica comandos+ senao_se
+	| {avalie} expressao_aritmetica p_caso* senao_p_caso?
+	| {enquanto} expressao_logica comandos+
+	| {repita}comandos+ expressao_logica
+	| {para} variavel [inicio]:numero [fim]:numero comandos+
+	| {para_passo} variavel [inicio]:numero [passos]:numero [fim]:numero comandos+;
 					
-	senao_se = {senao_se} senao comandos*;
+	senao_se = {senao_se} comandos+;
 	
-	p_caso = {caso} caso valor dois_pontos comandos*;
+	p_caso = {caso} valor comandos+;
 	
-	senao_p_caso = {senao_caso} senao dois_pontos comandos*;
+	senao_p_caso = {senao_caso} comandos+;
 						
-	expressao_logica = {e} termo_logico e expressao_logica
-	| {ou} termo_logico ou expressao_logica
-	| {eou} termo_logico eou expressao_logica
-	| {nao} nao expressao_logica
-	| {termo} termo_logico;
+	expressao_logica = {e} [esquerda]:expressao_logica [direita]:expressao_logica
+	| {ou} [esquerda]:expressao_logica [direita]:expressao_logica
+	| {eou} [esquerda]:expressao_logica [direita]:expressao_logica
+	| {nao} expressao_logica
+	| {parentese_logica} expressao_logica 
+	| {igual} [esquerda]:expressao_aritmetica [direita]:expressao_aritmetica
+	| {diferente} [esquerda]:expressao_aritmetica [direita]:expressao_aritmetica
+	| {maior_q} [esquerda]:expressao_aritmetica [direita]:expressao_aritmetica
+	| {menor_q} [esquerda]:expressao_aritmetica [direita]:expressao_aritmetica
+	| {maior_igual} [esquerda]:expressao_aritmetica [direita]:expressao_aritmetica
+	| {menor_igual} [esquerda]:expressao_aritmetica [direita]:expressao_aritmetica;
 						
-	termo_logico = {parentese_logica} e_parentese expressao_logica d_parentese
-	| {relacional} expressao_relacional;
-	
-	expressao_relacional = {igual} [esquerda]:expressao_aritmetica igual [direita]:expressao_aritmetica
-	| {diferente} [esquerda]:expressao_aritmetica [direita]:diferente expressao_aritmetica
-	| {maior_q} [esquerda]:expressao_aritmetica maior_q [direita]:expressao_aritmetica
-	| {manor_q} [esquerda]:expressao_aritmetica menor_q [direita]:expressao_aritmetica
-	| {maior_igual} [esquerda]:expressao_aritmetica maior_igual [direita]:expressao_aritmetica
-	| {menor_igual} [esquerda]:expressao_aritmetica menor_igual [direita]:expressao_aritmetica;
-						
-	expressao_aritmetica = {soma} termo_aritmetico mais expressao_aritmetica
-	| {subtracao} termo_aritmetico menos expressao_aritmetica
-	| {menos} menos expressao_aritmetica
-	| {termo} termo_aritmetico;
-
-	termo_aritmetico = {multiplicacao} fator_aritmetico multiplicacao termo_aritmetico
-	| {divisao} fator_aritmetico divisao termo_aritmetico
-	| {fator} fator_aritmetico;
-
-	fator_aritmetico = {parentese_aritmetica} e_parentese expressao_aritmetica d_parentese
+	expressao_aritmetica = {soma} [esquerda]:expressao_aritmetica [direita]:expressao_aritmetica
+	| {subtracao} [esquerda]:expressao_aritmetica [direita]:expressao_aritmetica
+	| {menos} expressao_aritmetica
+	| {multiplicacao} [esquerda]:expressao_aritmetica [direita]:expressao_aritmetica
+	| {divisao} [esquerda]:expressao_aritmetica [direita]:expressao_aritmetica
+	| {parentese_aritmetica} expressao_aritmetica 
 	| {variavel} variavel
 	| {valor} valor;
