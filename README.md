@@ -17,4 +17,3 @@ Análise Sintática: 2,0
 Sintaxe Abstrata: 2,0
 Análise Semântica: 2,0
 Geração de Código: 2,0
->>>>>>> origin/master
