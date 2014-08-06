@@ -1,13 +1,11 @@
 /*
-*****************************************************************
-*	Especificação da Gramática para o Projeto de Compiladores	*
-*	Grupo: 	JAIR KLEYTON DA SILVA NUNES						  	*
-*	 		NATANAEL MACEDO DA SILVA JUNIOR						*
-*	Etapas desenvolvidas neste documento:						*
-*		léxico - feito											*
-*		sintático - feito										*
-*		AST - feito												*
-*****************************************************************
+Especificação da Gramática para o Projeto de Compiladores
+Grupo: 	JAIR KLEYTON DA SILVA NUNES
+ 		NATANAEL MACEDO DA SILVA JUNIOR
+Etapas desenvolvidas neste documento:
+	léxico - feito
+	sintático - feito
+	AST - feito
 */
 
 Package compilador;
