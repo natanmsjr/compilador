@@ -1,0 +1,4 @@
+programa teste0
+inicio
+	inteiro : a;
+fim.

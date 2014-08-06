@@ -7,9 +7,8 @@ import compilador.analysis.*;
 @SuppressWarnings("nls")
 public final class ASomaExpressaoAritmetica extends PExpressaoAritmetica
 {
-    private PTermoAritmetico _termoAritmetico_;
-    private TMais _mais_;
-    private PExpressaoAritmetica _expressaoAritmetica_;
+    private PExpressaoAritmetica _esquerda_;
+    private PExpressaoAritmetica _direita_;
 
     public ASomaExpressaoAritmetica()
     {
@@ -17,16 +16,13 @@ public final class ASomaExpressaoAritmetica extends PExpressaoAritmetica
     }
 
     public ASomaExpressaoAritmetica(
-        @SuppressWarnings("hiding") PTermoAritmetico _termoAritmetico_,
-        @SuppressWarnings("hiding") TMais _mais_,
-        @SuppressWarnings("hiding") PExpressaoAritmetica _expressaoAritmetica_)
+        @SuppressWarnings("hiding") PExpressaoAritmetica _esquerda_,
+        @SuppressWarnings("hiding") PExpressaoAritmetica _direita_)
     {
         // Constructor
-        setTermoAritmetico(_termoAritmetico_);
+        setEsquerda(_esquerda_);
 
-        setMais(_mais_);
-
-        setExpressaoAritmetica(_expressaoAritmetica_);
+        setDireita(_direita_);
 
     }
 
@@ -34,9 +30,8 @@ public final class ASomaExpressaoAritmetica extends PExpressaoAritmetica
     public Object clone()
     {
         return new ASomaExpressaoAritmetica(
-            cloneNode(this._termoAritmetico_),
-            cloneNode(this._mais_),
-            cloneNode(this._expressaoAritmetica_));
+            cloneNode(this._esquerda_),
+            cloneNode(this._direita_));
     }
 
     @Override
@@ -45,16 +40,16 @@ public final class ASomaExpressaoAritmetica extends PExpressaoAritmetica
         ((Analysis) sw).caseASomaExpressaoAritmetica(this);
     }
 
-    public PTermoAritmetico getTermoAritmetico()
+    public PExpressaoAritmetica getEsquerda()
     {
-        return this._termoAritmetico_;
+        return this._esquerda_;
     }
 
-    public void setTermoAritmetico(PTermoAritmetico node)
+    public void setEsquerda(PExpressaoAritmetica node)
     {
-        if(this._termoAritmetico_ != null)
+        if(this._esquerda_ != null)
         {
-            this._termoAritmetico_.parent(null);
+            this._esquerda_.parent(null);
         }
 
         if(node != null)
@@ -67,19 +62,19 @@ public final class ASomaExpressaoAritmetica extends PExpressaoAritmetica
             node.parent(this);
         }
 
-        this._termoAritmetico_ = node;
+        this._esquerda_ = node;
     }
 
-    public TMais getMais()
+    public PExpressaoAritmetica getDireita()
     {
-        return this._mais_;
+        return this._direita_;
     }
 
-    public void setMais(TMais node)
+    public void setDireita(PExpressaoAritmetica node)
     {
-        if(this._mais_ != null)
+        if(this._direita_ != null)
         {
-            this._mais_.parent(null);
+            this._direita_.parent(null);
         }
 
         if(node != null)
@@ -92,62 +87,30 @@ public final class ASomaExpressaoAritmetica extends PExpressaoAritmetica
             node.parent(this);
         }
 
-        this._mais_ = node;
-    }
-
-    public PExpressaoAritmetica getExpressaoAritmetica()
-    {
-        return this._expressaoAritmetica_;
-    }
-
-    public void setExpressaoAritmetica(PExpressaoAritmetica node)
-    {
-        if(this._expressaoAritmetica_ != null)
-        {
-            this._expressaoAritmetica_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._expressaoAritmetica_ = node;
+        this._direita_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._termoAritmetico_)
-            + toString(this._mais_)
-            + toString(this._expressaoAritmetica_);
+            + toString(this._esquerda_)
+            + toString(this._direita_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._termoAritmetico_ == child)
+        if(this._esquerda_ == child)
         {
-            this._termoAritmetico_ = null;
+            this._esquerda_ = null;
             return;
         }
 
-        if(this._mais_ == child)
+        if(this._direita_ == child)
         {
-            this._mais_ = null;
-            return;
-        }
-
-        if(this._expressaoAritmetica_ == child)
-        {
-            this._expressaoAritmetica_ = null;
+            this._direita_ = null;
             return;
         }
 
@@ -158,21 +121,15 @@ public final class ASomaExpressaoAritmetica extends PExpressaoAritmetica
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._termoAritmetico_ == oldChild)
+        if(this._esquerda_ == oldChild)
         {
-            setTermoAritmetico((PTermoAritmetico) newChild);
+            setEsquerda((PExpressaoAritmetica) newChild);
             return;
         }
 
-        if(this._mais_ == oldChild)
+        if(this._direita_ == oldChild)
         {
-            setMais((TMais) newChild);
-            return;
-        }
-
-        if(this._expressaoAritmetica_ == oldChild)
-        {
-            setExpressaoAritmetica((PExpressaoAritmetica) newChild);
+            setDireita((PExpressaoAritmetica) newChild);
             return;
         }
 

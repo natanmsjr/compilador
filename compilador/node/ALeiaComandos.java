@@ -2,16 +2,13 @@
 
 package compilador.node;
 
+import java.util.*;
 import compilador.analysis.*;
 
 @SuppressWarnings("nls")
 public final class ALeiaComandos extends PComandos
 {
-    private TLeia _leia_;
-    private TEParentese _eParentese_;
-    private PVar _var_;
-    private TDParentese _dParentese_;
-    private TPontoVirgula _pontoVirgula_;
+    private final LinkedList<PVar> _var_ = new LinkedList<PVar>();
 
     public ALeiaComandos()
     {
@@ -19,22 +16,10 @@ public final class ALeiaComandos extends PComandos
     }
 
     public ALeiaComandos(
-        @SuppressWarnings("hiding") TLeia _leia_,
-        @SuppressWarnings("hiding") TEParentese _eParentese_,
-        @SuppressWarnings("hiding") PVar _var_,
-        @SuppressWarnings("hiding") TDParentese _dParentese_,
-        @SuppressWarnings("hiding") TPontoVirgula _pontoVirgula_)
+        @SuppressWarnings("hiding") List<?> _var_)
     {
         // Constructor
-        setLeia(_leia_);
-
-        setEParentese(_eParentese_);
-
         setVar(_var_);
-
-        setDParentese(_dParentese_);
-
-        setPontoVirgula(_pontoVirgula_);
 
     }
 
@@ -42,11 +27,7 @@ public final class ALeiaComandos extends PComandos
     public Object clone()
     {
         return new ALeiaComandos(
-            cloneNode(this._leia_),
-            cloneNode(this._eParentese_),
-            cloneNode(this._var_),
-            cloneNode(this._dParentese_),
-            cloneNode(this._pontoVirgula_));
+            cloneList(this._var_));
     }
 
     @Override
@@ -55,173 +36,45 @@ public final class ALeiaComandos extends PComandos
         ((Analysis) sw).caseALeiaComandos(this);
     }
 
-    public TLeia getLeia()
-    {
-        return this._leia_;
-    }
-
-    public void setLeia(TLeia node)
-    {
-        if(this._leia_ != null)
-        {
-            this._leia_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._leia_ = node;
-    }
-
-    public TEParentese getEParentese()
-    {
-        return this._eParentese_;
-    }
-
-    public void setEParentese(TEParentese node)
-    {
-        if(this._eParentese_ != null)
-        {
-            this._eParentese_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._eParentese_ = node;
-    }
-
-    public PVar getVar()
+    public LinkedList<PVar> getVar()
     {
         return this._var_;
     }
 
-    public void setVar(PVar node)
+    public void setVar(List<?> list)
     {
-        if(this._var_ != null)
+        for(PVar e : this._var_)
         {
-            this._var_.parent(null);
+            e.parent(null);
         }
+        this._var_.clear();
 
-        if(node != null)
+        for(Object obj_e : list)
         {
-            if(node.parent() != null)
+            PVar e = (PVar) obj_e;
+            if(e.parent() != null)
             {
-                node.parent().removeChild(node);
+                e.parent().removeChild(e);
             }
 
-            node.parent(this);
+            e.parent(this);
+            this._var_.add(e);
         }
-
-        this._var_ = node;
-    }
-
-    public TDParentese getDParentese()
-    {
-        return this._dParentese_;
-    }
-
-    public void setDParentese(TDParentese node)
-    {
-        if(this._dParentese_ != null)
-        {
-            this._dParentese_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._dParentese_ = node;
-    }
-
-    public TPontoVirgula getPontoVirgula()
-    {
-        return this._pontoVirgula_;
-    }
-
-    public void setPontoVirgula(TPontoVirgula node)
-    {
-        if(this._pontoVirgula_ != null)
-        {
-            this._pontoVirgula_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._pontoVirgula_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._leia_)
-            + toString(this._eParentese_)
-            + toString(this._var_)
-            + toString(this._dParentese_)
-            + toString(this._pontoVirgula_);
+            + toString(this._var_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._leia_ == child)
+        if(this._var_.remove(child))
         {
-            this._leia_ = null;
-            return;
-        }
-
-        if(this._eParentese_ == child)
-        {
-            this._eParentese_ = null;
-            return;
-        }
-
-        if(this._var_ == child)
-        {
-            this._var_ = null;
-            return;
-        }
-
-        if(this._dParentese_ == child)
-        {
-            this._dParentese_ = null;
-            return;
-        }
-
-        if(this._pontoVirgula_ == child)
-        {
-            this._pontoVirgula_ = null;
             return;
         }
 
@@ -232,34 +85,22 @@ public final class ALeiaComandos extends PComandos
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._leia_ == oldChild)
+        for(ListIterator<PVar> i = this._var_.listIterator(); i.hasNext();)
         {
-            setLeia((TLeia) newChild);
-            return;
-        }
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PVar) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
 
-        if(this._eParentese_ == oldChild)
-        {
-            setEParentese((TEParentese) newChild);
-            return;
-        }
-
-        if(this._var_ == oldChild)
-        {
-            setVar((PVar) newChild);
-            return;
-        }
-
-        if(this._dParentese_ == oldChild)
-        {
-            setDParentese((TDParentese) newChild);
-            return;
-        }
-
-        if(this._pontoVirgula_ == oldChild)
-        {
-            setPontoVirgula((TPontoVirgula) newChild);
-            return;
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
         }
 
         throw new RuntimeException("Not a child.");

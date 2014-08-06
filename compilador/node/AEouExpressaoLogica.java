@@ -7,9 +7,8 @@ import compilador.analysis.*;
 @SuppressWarnings("nls")
 public final class AEouExpressaoLogica extends PExpressaoLogica
 {
-    private PTermoLogico _termoLogico_;
-    private TEou _eou_;
-    private PExpressaoLogica _expressaoLogica_;
+    private PExpressaoLogica _esquerda_;
+    private PExpressaoLogica _direita_;
 
     public AEouExpressaoLogica()
     {
@@ -17,16 +16,13 @@ public final class AEouExpressaoLogica extends PExpressaoLogica
     }
 
     public AEouExpressaoLogica(
-        @SuppressWarnings("hiding") PTermoLogico _termoLogico_,
-        @SuppressWarnings("hiding") TEou _eou_,
-        @SuppressWarnings("hiding") PExpressaoLogica _expressaoLogica_)
+        @SuppressWarnings("hiding") PExpressaoLogica _esquerda_,
+        @SuppressWarnings("hiding") PExpressaoLogica _direita_)
     {
         // Constructor
-        setTermoLogico(_termoLogico_);
+        setEsquerda(_esquerda_);
 
-        setEou(_eou_);
-
-        setExpressaoLogica(_expressaoLogica_);
+        setDireita(_direita_);
 
     }
 
@@ -34,9 +30,8 @@ public final class AEouExpressaoLogica extends PExpressaoLogica
     public Object clone()
     {
         return new AEouExpressaoLogica(
-            cloneNode(this._termoLogico_),
-            cloneNode(this._eou_),
-            cloneNode(this._expressaoLogica_));
+            cloneNode(this._esquerda_),
+            cloneNode(this._direita_));
     }
 
     @Override
@@ -45,16 +40,16 @@ public final class AEouExpressaoLogica extends PExpressaoLogica
         ((Analysis) sw).caseAEouExpressaoLogica(this);
     }
 
-    public PTermoLogico getTermoLogico()
+    public PExpressaoLogica getEsquerda()
     {
-        return this._termoLogico_;
+        return this._esquerda_;
     }
 
-    public void setTermoLogico(PTermoLogico node)
+    public void setEsquerda(PExpressaoLogica node)
     {
-        if(this._termoLogico_ != null)
+        if(this._esquerda_ != null)
         {
-            this._termoLogico_.parent(null);
+            this._esquerda_.parent(null);
         }
 
         if(node != null)
@@ -67,19 +62,19 @@ public final class AEouExpressaoLogica extends PExpressaoLogica
             node.parent(this);
         }
 
-        this._termoLogico_ = node;
+        this._esquerda_ = node;
     }
 
-    public TEou getEou()
+    public PExpressaoLogica getDireita()
     {
-        return this._eou_;
+        return this._direita_;
     }
 
-    public void setEou(TEou node)
+    public void setDireita(PExpressaoLogica node)
     {
-        if(this._eou_ != null)
+        if(this._direita_ != null)
         {
-            this._eou_.parent(null);
+            this._direita_.parent(null);
         }
 
         if(node != null)
@@ -92,62 +87,30 @@ public final class AEouExpressaoLogica extends PExpressaoLogica
             node.parent(this);
         }
 
-        this._eou_ = node;
-    }
-
-    public PExpressaoLogica getExpressaoLogica()
-    {
-        return this._expressaoLogica_;
-    }
-
-    public void setExpressaoLogica(PExpressaoLogica node)
-    {
-        if(this._expressaoLogica_ != null)
-        {
-            this._expressaoLogica_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._expressaoLogica_ = node;
+        this._direita_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._termoLogico_)
-            + toString(this._eou_)
-            + toString(this._expressaoLogica_);
+            + toString(this._esquerda_)
+            + toString(this._direita_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._termoLogico_ == child)
+        if(this._esquerda_ == child)
         {
-            this._termoLogico_ = null;
+            this._esquerda_ = null;
             return;
         }
 
-        if(this._eou_ == child)
+        if(this._direita_ == child)
         {
-            this._eou_ = null;
-            return;
-        }
-
-        if(this._expressaoLogica_ == child)
-        {
-            this._expressaoLogica_ = null;
+            this._direita_ = null;
             return;
         }
 
@@ -158,21 +121,15 @@ public final class AEouExpressaoLogica extends PExpressaoLogica
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._termoLogico_ == oldChild)
+        if(this._esquerda_ == oldChild)
         {
-            setTermoLogico((PTermoLogico) newChild);
+            setEsquerda((PExpressaoLogica) newChild);
             return;
         }
 
-        if(this._eou_ == oldChild)
+        if(this._direita_ == oldChild)
         {
-            setEou((TEou) newChild);
-            return;
-        }
-
-        if(this._expressaoLogica_ == oldChild)
-        {
-            setExpressaoLogica((PExpressaoLogica) newChild);
+            setDireita((PExpressaoLogica) newChild);
             return;
         }
 

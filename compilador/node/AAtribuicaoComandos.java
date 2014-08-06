@@ -7,10 +7,8 @@ import compilador.analysis.*;
 @SuppressWarnings("nls")
 public final class AAtribuicaoComandos extends PComandos
 {
-    private PVar _var_;
-    private TAtribuicao _atribuicao_;
+    private PVariavel _variavel_;
     private PExpressaoAritmetica _expressaoAritmetica_;
-    private TPontoVirgula _pontoVirgula_;
 
     public AAtribuicaoComandos()
     {
@@ -18,19 +16,13 @@ public final class AAtribuicaoComandos extends PComandos
     }
 
     public AAtribuicaoComandos(
-        @SuppressWarnings("hiding") PVar _var_,
-        @SuppressWarnings("hiding") TAtribuicao _atribuicao_,
-        @SuppressWarnings("hiding") PExpressaoAritmetica _expressaoAritmetica_,
-        @SuppressWarnings("hiding") TPontoVirgula _pontoVirgula_)
+        @SuppressWarnings("hiding") PVariavel _variavel_,
+        @SuppressWarnings("hiding") PExpressaoAritmetica _expressaoAritmetica_)
     {
         // Constructor
-        setVar(_var_);
-
-        setAtribuicao(_atribuicao_);
+        setVariavel(_variavel_);
 
         setExpressaoAritmetica(_expressaoAritmetica_);
-
-        setPontoVirgula(_pontoVirgula_);
 
     }
 
@@ -38,10 +30,8 @@ public final class AAtribuicaoComandos extends PComandos
     public Object clone()
     {
         return new AAtribuicaoComandos(
-            cloneNode(this._var_),
-            cloneNode(this._atribuicao_),
-            cloneNode(this._expressaoAritmetica_),
-            cloneNode(this._pontoVirgula_));
+            cloneNode(this._variavel_),
+            cloneNode(this._expressaoAritmetica_));
     }
 
     @Override
@@ -50,16 +40,16 @@ public final class AAtribuicaoComandos extends PComandos
         ((Analysis) sw).caseAAtribuicaoComandos(this);
     }
 
-    public PVar getVar()
+    public PVariavel getVariavel()
     {
-        return this._var_;
+        return this._variavel_;
     }
 
-    public void setVar(PVar node)
+    public void setVariavel(PVariavel node)
     {
-        if(this._var_ != null)
+        if(this._variavel_ != null)
         {
-            this._var_.parent(null);
+            this._variavel_.parent(null);
         }
 
         if(node != null)
@@ -72,32 +62,7 @@ public final class AAtribuicaoComandos extends PComandos
             node.parent(this);
         }
 
-        this._var_ = node;
-    }
-
-    public TAtribuicao getAtribuicao()
-    {
-        return this._atribuicao_;
-    }
-
-    public void setAtribuicao(TAtribuicao node)
-    {
-        if(this._atribuicao_ != null)
-        {
-            this._atribuicao_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._atribuicao_ = node;
+        this._variavel_ = node;
     }
 
     public PExpressaoAritmetica getExpressaoAritmetica()
@@ -125,66 +90,27 @@ public final class AAtribuicaoComandos extends PComandos
         this._expressaoAritmetica_ = node;
     }
 
-    public TPontoVirgula getPontoVirgula()
-    {
-        return this._pontoVirgula_;
-    }
-
-    public void setPontoVirgula(TPontoVirgula node)
-    {
-        if(this._pontoVirgula_ != null)
-        {
-            this._pontoVirgula_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._pontoVirgula_ = node;
-    }
-
     @Override
     public String toString()
     {
         return ""
-            + toString(this._var_)
-            + toString(this._atribuicao_)
-            + toString(this._expressaoAritmetica_)
-            + toString(this._pontoVirgula_);
+            + toString(this._variavel_)
+            + toString(this._expressaoAritmetica_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._var_ == child)
+        if(this._variavel_ == child)
         {
-            this._var_ = null;
-            return;
-        }
-
-        if(this._atribuicao_ == child)
-        {
-            this._atribuicao_ = null;
+            this._variavel_ = null;
             return;
         }
 
         if(this._expressaoAritmetica_ == child)
         {
             this._expressaoAritmetica_ = null;
-            return;
-        }
-
-        if(this._pontoVirgula_ == child)
-        {
-            this._pontoVirgula_ = null;
             return;
         }
 
@@ -195,27 +121,15 @@ public final class AAtribuicaoComandos extends PComandos
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._var_ == oldChild)
+        if(this._variavel_ == oldChild)
         {
-            setVar((PVar) newChild);
-            return;
-        }
-
-        if(this._atribuicao_ == oldChild)
-        {
-            setAtribuicao((TAtribuicao) newChild);
+            setVariavel((PVariavel) newChild);
             return;
         }
 
         if(this._expressaoAritmetica_ == oldChild)
         {
             setExpressaoAritmetica((PExpressaoAritmetica) newChild);
-            return;
-        }
-
-        if(this._pontoVirgula_ == oldChild)
-        {
-            setPontoVirgula((TPontoVirgula) newChild);
             return;
         }
 

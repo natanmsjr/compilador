@@ -1,0 +1,12 @@
+/*
+* 
+* Teste de Comentario Inválido 
+* 
+*/
+//
+/*
+	// */
+*/
+programa teste
+inicio
+fim.

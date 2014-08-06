@@ -7,9 +7,8 @@ import compilador.analysis.*;
 @SuppressWarnings("nls")
 public final class ASubtracaoExpressaoAritmetica extends PExpressaoAritmetica
 {
-    private PTermoAritmetico _termoAritmetico_;
-    private TMenos _menos_;
-    private PExpressaoAritmetica _expressaoAritmetica_;
+    private PExpressaoAritmetica _esquerda_;
+    private PExpressaoAritmetica _direita_;
 
     public ASubtracaoExpressaoAritmetica()
     {
@@ -17,16 +16,13 @@ public final class ASubtracaoExpressaoAritmetica extends PExpressaoAritmetica
     }
 
     public ASubtracaoExpressaoAritmetica(
-        @SuppressWarnings("hiding") PTermoAritmetico _termoAritmetico_,
-        @SuppressWarnings("hiding") TMenos _menos_,
-        @SuppressWarnings("hiding") PExpressaoAritmetica _expressaoAritmetica_)
+        @SuppressWarnings("hiding") PExpressaoAritmetica _esquerda_,
+        @SuppressWarnings("hiding") PExpressaoAritmetica _direita_)
     {
         // Constructor
-        setTermoAritmetico(_termoAritmetico_);
+        setEsquerda(_esquerda_);
 
-        setMenos(_menos_);
-
-        setExpressaoAritmetica(_expressaoAritmetica_);
+        setDireita(_direita_);
 
     }
 
@@ -34,9 +30,8 @@ public final class ASubtracaoExpressaoAritmetica extends PExpressaoAritmetica
     public Object clone()
     {
         return new ASubtracaoExpressaoAritmetica(
-            cloneNode(this._termoAritmetico_),
-            cloneNode(this._menos_),
-            cloneNode(this._expressaoAritmetica_));
+            cloneNode(this._esquerda_),
+            cloneNode(this._direita_));
     }
 
     @Override
@@ -45,16 +40,16 @@ public final class ASubtracaoExpressaoAritmetica extends PExpressaoAritmetica
         ((Analysis) sw).caseASubtracaoExpressaoAritmetica(this);
     }
 
-    public PTermoAritmetico getTermoAritmetico()
+    public PExpressaoAritmetica getEsquerda()
     {
-        return this._termoAritmetico_;
+        return this._esquerda_;
     }
 
-    public void setTermoAritmetico(PTermoAritmetico node)
+    public void setEsquerda(PExpressaoAritmetica node)
     {
-        if(this._termoAritmetico_ != null)
+        if(this._esquerda_ != null)
         {
-            this._termoAritmetico_.parent(null);
+            this._esquerda_.parent(null);
         }
 
         if(node != null)
@@ -67,19 +62,19 @@ public final class ASubtracaoExpressaoAritmetica extends PExpressaoAritmetica
             node.parent(this);
         }
 
-        this._termoAritmetico_ = node;
+        this._esquerda_ = node;
     }
 
-    public TMenos getMenos()
+    public PExpressaoAritmetica getDireita()
     {
-        return this._menos_;
+        return this._direita_;
     }
 
-    public void setMenos(TMenos node)
+    public void setDireita(PExpressaoAritmetica node)
     {
-        if(this._menos_ != null)
+        if(this._direita_ != null)
         {
-            this._menos_.parent(null);
+            this._direita_.parent(null);
         }
 
         if(node != null)
@@ -92,62 +87,30 @@ public final class ASubtracaoExpressaoAritmetica extends PExpressaoAritmetica
             node.parent(this);
         }
 
-        this._menos_ = node;
-    }
-
-    public PExpressaoAritmetica getExpressaoAritmetica()
-    {
-        return this._expressaoAritmetica_;
-    }
-
-    public void setExpressaoAritmetica(PExpressaoAritmetica node)
-    {
-        if(this._expressaoAritmetica_ != null)
-        {
-            this._expressaoAritmetica_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._expressaoAritmetica_ = node;
+        this._direita_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._termoAritmetico_)
-            + toString(this._menos_)
-            + toString(this._expressaoAritmetica_);
+            + toString(this._esquerda_)
+            + toString(this._direita_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._termoAritmetico_ == child)
+        if(this._esquerda_ == child)
         {
-            this._termoAritmetico_ = null;
+            this._esquerda_ = null;
             return;
         }
 
-        if(this._menos_ == child)
+        if(this._direita_ == child)
         {
-            this._menos_ = null;
-            return;
-        }
-
-        if(this._expressaoAritmetica_ == child)
-        {
-            this._expressaoAritmetica_ = null;
+            this._direita_ = null;
             return;
         }
 
@@ -158,21 +121,15 @@ public final class ASubtracaoExpressaoAritmetica extends PExpressaoAritmetica
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._termoAritmetico_ == oldChild)
+        if(this._esquerda_ == oldChild)
         {
-            setTermoAritmetico((PTermoAritmetico) newChild);
+            setEsquerda((PExpressaoAritmetica) newChild);
             return;
         }
 
-        if(this._menos_ == oldChild)
+        if(this._direita_ == oldChild)
         {
-            setMenos((TMenos) newChild);
-            return;
-        }
-
-        if(this._expressaoAritmetica_ == oldChild)
-        {
-            setExpressaoAritmetica((PExpressaoAritmetica) newChild);
+            setDireita((PExpressaoAritmetica) newChild);
             return;
         }
 

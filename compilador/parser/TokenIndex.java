@@ -34,55 +34,55 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTBarra(@SuppressWarnings("unused") TBarra node)
+    public void caseTEParentese(@SuppressWarnings("unused") TEParentese node)
     {
         this.index = 4;
     }
 
     @Override
-    public void caseTEParentese(@SuppressWarnings("unused") TEParentese node)
+    public void caseTDParentese(@SuppressWarnings("unused") TDParentese node)
     {
         this.index = 5;
     }
 
     @Override
-    public void caseTDParentese(@SuppressWarnings("unused") TDParentese node)
+    public void caseTEColchete(@SuppressWarnings("unused") TEColchete node)
     {
         this.index = 6;
     }
 
     @Override
-    public void caseTEColchete(@SuppressWarnings("unused") TEColchete node)
+    public void caseTDColchete(@SuppressWarnings("unused") TDColchete node)
     {
         this.index = 7;
     }
 
     @Override
-    public void caseTDColchete(@SuppressWarnings("unused") TDColchete node)
+    public void caseTEChave(@SuppressWarnings("unused") TEChave node)
     {
         this.index = 8;
     }
 
     @Override
-    public void caseTEChave(@SuppressWarnings("unused") TEChave node)
+    public void caseTDChave(@SuppressWarnings("unused") TDChave node)
     {
         this.index = 9;
     }
 
     @Override
-    public void caseTDChave(@SuppressWarnings("unused") TDChave node)
+    public void caseTMenos(@SuppressWarnings("unused") TMenos node)
     {
         this.index = 10;
     }
 
     @Override
-    public void caseTMais(@SuppressWarnings("unused") TMais node)
+    public void caseTSoma(@SuppressWarnings("unused") TSoma node)
     {
         this.index = 11;
     }
 
     @Override
-    public void caseTMenos(@SuppressWarnings("unused") TMenos node)
+    public void caseTSubtracao(@SuppressWarnings("unused") TSubtracao node)
     {
         this.index = 12;
     }
@@ -346,44 +346,38 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTTipo(@SuppressWarnings("unused") TTipo node)
+    public void caseTComentarioAninhadoFim(@SuppressWarnings("unused") TComentarioAninhadoFim node)
     {
         this.index = 56;
     }
 
     @Override
-    public void caseTComentarioAninhadoFim(@SuppressWarnings("unused") TComentarioAninhadoFim node)
+    public void caseTComentarioAninhadoCorpo(@SuppressWarnings("unused") TComentarioAninhadoCorpo node)
     {
         this.index = 57;
     }
 
     @Override
-    public void caseTComentarioAninhadoCorpo(@SuppressWarnings("unused") TComentarioAninhadoCorpo node)
+    public void caseTEstrela(@SuppressWarnings("unused") TEstrela node)
     {
         this.index = 58;
     }
 
     @Override
-    public void caseTEstrela(@SuppressWarnings("unused") TEstrela node)
+    public void caseTBarraInclinada(@SuppressWarnings("unused") TBarraInclinada node)
     {
         this.index = 59;
     }
 
     @Override
-    public void caseTBarraInclinada(@SuppressWarnings("unused") TBarraInclinada node)
+    public void caseTComentarioLinha(@SuppressWarnings("unused") TComentarioLinha node)
     {
         this.index = 60;
     }
 
     @Override
-    public void caseTComentarioLinha(@SuppressWarnings("unused") TComentarioLinha node)
-    {
-        this.index = 61;
-    }
-
-    @Override
     public void caseEOF(@SuppressWarnings("unused") EOF node)
     {
-        this.index = 62;
+        this.index = 61;
     }
 }

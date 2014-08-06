@@ -7,7 +7,6 @@ import compilador.analysis.*;
 @SuppressWarnings("nls")
 public final class ANaoExpressaoLogica extends PExpressaoLogica
 {
-    private TNao _nao_;
     private PExpressaoLogica _expressaoLogica_;
 
     public ANaoExpressaoLogica()
@@ -16,12 +15,9 @@ public final class ANaoExpressaoLogica extends PExpressaoLogica
     }
 
     public ANaoExpressaoLogica(
-        @SuppressWarnings("hiding") TNao _nao_,
         @SuppressWarnings("hiding") PExpressaoLogica _expressaoLogica_)
     {
         // Constructor
-        setNao(_nao_);
-
         setExpressaoLogica(_expressaoLogica_);
 
     }
@@ -30,7 +26,6 @@ public final class ANaoExpressaoLogica extends PExpressaoLogica
     public Object clone()
     {
         return new ANaoExpressaoLogica(
-            cloneNode(this._nao_),
             cloneNode(this._expressaoLogica_));
     }
 
@@ -38,31 +33,6 @@ public final class ANaoExpressaoLogica extends PExpressaoLogica
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseANaoExpressaoLogica(this);
-    }
-
-    public TNao getNao()
-    {
-        return this._nao_;
-    }
-
-    public void setNao(TNao node)
-    {
-        if(this._nao_ != null)
-        {
-            this._nao_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._nao_ = node;
     }
 
     public PExpressaoLogica getExpressaoLogica()
@@ -94,7 +64,6 @@ public final class ANaoExpressaoLogica extends PExpressaoLogica
     public String toString()
     {
         return ""
-            + toString(this._nao_)
             + toString(this._expressaoLogica_);
     }
 
@@ -102,12 +71,6 @@ public final class ANaoExpressaoLogica extends PExpressaoLogica
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._nao_ == child)
-        {
-            this._nao_ = null;
-            return;
-        }
-
         if(this._expressaoLogica_ == child)
         {
             this._expressaoLogica_ = null;
@@ -121,12 +84,6 @@ public final class ANaoExpressaoLogica extends PExpressaoLogica
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._nao_ == oldChild)
-        {
-            setNao((TNao) newChild);
-            return;
-        }
-
         if(this._expressaoLogica_ == oldChild)
         {
             setExpressaoLogica((PExpressaoLogica) newChild);

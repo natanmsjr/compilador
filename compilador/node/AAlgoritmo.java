@@ -11,7 +11,7 @@ public final class AAlgoritmo extends PAlgoritmo
     private TPrograma _programa_;
     private TId _id_;
     private TInicio _inicio_;
-    private PDeclaracao _declaracao_;
+    private final LinkedList<PDeclaracao> _declaracao_ = new LinkedList<PDeclaracao>();
     private final LinkedList<PComandos> _comandos_ = new LinkedList<PComandos>();
     private TFim _fim_;
 
@@ -24,7 +24,7 @@ public final class AAlgoritmo extends PAlgoritmo
         @SuppressWarnings("hiding") TPrograma _programa_,
         @SuppressWarnings("hiding") TId _id_,
         @SuppressWarnings("hiding") TInicio _inicio_,
-        @SuppressWarnings("hiding") PDeclaracao _declaracao_,
+        @SuppressWarnings("hiding") List<?> _declaracao_,
         @SuppressWarnings("hiding") List<?> _comandos_,
         @SuppressWarnings("hiding") TFim _fim_)
     {
@@ -50,7 +50,7 @@ public final class AAlgoritmo extends PAlgoritmo
             cloneNode(this._programa_),
             cloneNode(this._id_),
             cloneNode(this._inicio_),
-            cloneNode(this._declaracao_),
+            cloneList(this._declaracao_),
             cloneList(this._comandos_),
             cloneNode(this._fim_));
     }
@@ -136,29 +136,30 @@ public final class AAlgoritmo extends PAlgoritmo
         this._inicio_ = node;
     }
 
-    public PDeclaracao getDeclaracao()
+    public LinkedList<PDeclaracao> getDeclaracao()
     {
         return this._declaracao_;
     }
 
-    public void setDeclaracao(PDeclaracao node)
+    public void setDeclaracao(List<?> list)
     {
-        if(this._declaracao_ != null)
+        for(PDeclaracao e : this._declaracao_)
         {
-            this._declaracao_.parent(null);
+            e.parent(null);
         }
+        this._declaracao_.clear();
 
-        if(node != null)
+        for(Object obj_e : list)
         {
-            if(node.parent() != null)
+            PDeclaracao e = (PDeclaracao) obj_e;
+            if(e.parent() != null)
             {
-                node.parent().removeChild(node);
+                e.parent().removeChild(e);
             }
 
-            node.parent(this);
+            e.parent(this);
+            this._declaracao_.add(e);
         }
-
-        this._declaracao_ = node;
     }
 
     public LinkedList<PComandos> getComandos()
@@ -246,9 +247,8 @@ public final class AAlgoritmo extends PAlgoritmo
             return;
         }
 
-        if(this._declaracao_ == child)
+        if(this._declaracao_.remove(child))
         {
-            this._declaracao_ = null;
             return;
         }
 
@@ -288,10 +288,22 @@ public final class AAlgoritmo extends PAlgoritmo
             return;
         }
 
-        if(this._declaracao_ == oldChild)
+        for(ListIterator<PDeclaracao> i = this._declaracao_.listIterator(); i.hasNext();)
         {
-            setDeclaracao((PDeclaracao) newChild);
-            return;
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PDeclaracao) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
         }
 
         for(ListIterator<PComandos> i = this._comandos_.listIterator(); i.hasNext();)

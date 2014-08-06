@@ -7,7 +7,6 @@ import compilador.analysis.*;
 @SuppressWarnings("nls")
 public final class AMenosExpressaoAritmetica extends PExpressaoAritmetica
 {
-    private TMenos _menos_;
     private PExpressaoAritmetica _expressaoAritmetica_;
 
     public AMenosExpressaoAritmetica()
@@ -16,12 +15,9 @@ public final class AMenosExpressaoAritmetica extends PExpressaoAritmetica
     }
 
     public AMenosExpressaoAritmetica(
-        @SuppressWarnings("hiding") TMenos _menos_,
         @SuppressWarnings("hiding") PExpressaoAritmetica _expressaoAritmetica_)
     {
         // Constructor
-        setMenos(_menos_);
-
         setExpressaoAritmetica(_expressaoAritmetica_);
 
     }
@@ -30,7 +26,6 @@ public final class AMenosExpressaoAritmetica extends PExpressaoAritmetica
     public Object clone()
     {
         return new AMenosExpressaoAritmetica(
-            cloneNode(this._menos_),
             cloneNode(this._expressaoAritmetica_));
     }
 
@@ -38,31 +33,6 @@ public final class AMenosExpressaoAritmetica extends PExpressaoAritmetica
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseAMenosExpressaoAritmetica(this);
-    }
-
-    public TMenos getMenos()
-    {
-        return this._menos_;
-    }
-
-    public void setMenos(TMenos node)
-    {
-        if(this._menos_ != null)
-        {
-            this._menos_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._menos_ = node;
     }
 
     public PExpressaoAritmetica getExpressaoAritmetica()
@@ -94,7 +64,6 @@ public final class AMenosExpressaoAritmetica extends PExpressaoAritmetica
     public String toString()
     {
         return ""
-            + toString(this._menos_)
             + toString(this._expressaoAritmetica_);
     }
 
@@ -102,12 +71,6 @@ public final class AMenosExpressaoAritmetica extends PExpressaoAritmetica
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._menos_ == child)
-        {
-            this._menos_ = null;
-            return;
-        }
-
         if(this._expressaoAritmetica_ == child)
         {
             this._expressaoAritmetica_ = null;
@@ -121,12 +84,6 @@ public final class AMenosExpressaoAritmetica extends PExpressaoAritmetica
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._menos_ == oldChild)
-        {
-            setMenos((TMenos) newChild);
-            return;
-        }
-
         if(this._expressaoAritmetica_ == oldChild)
         {
             setExpressaoAritmetica((PExpressaoAritmetica) newChild);
