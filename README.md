@@ -12,8 +12,8 @@ Grupo:
 200920001500 - NATANAEL MACEDO DA SILVA JUNIOR
 
 Etapas:
-Análise Léxica: 2,0
-Análise Sintática: 2,0
-Sintaxe Abstrata: 2,0
-Análise Semântica: 2,0
-Geração de Código: 2,0
+Análise Léxica: 2,5
+Análise Sintática: 2,5
+Sintaxe Abstrata: 2,5
+Análise Semântica: 2,5
+Geração de Código: 0,0
