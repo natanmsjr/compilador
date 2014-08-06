@@ -1,0 +1,28 @@
+programa teste02
+inicio
+	inteiro: a;
+	// testando leia
+	leia(b);
+	leia(c, d);
+	
+	// testando se
+	se (a = b) entao
+		escreva('a');
+	fim se;
+	
+	// testando se com senao
+	se (a <= b) entao
+		escreva('a');
+	senao
+		escreva('b');
+	fim se;
+	
+	// teste de se aninhado
+	se ((a + b) > (b / a)) entao
+		escreva(a + b);
+	senao
+		se ((a * b) > (a + b)) entao
+			escreva(a * b);
+		fim se;
+	fim se;
+fim.

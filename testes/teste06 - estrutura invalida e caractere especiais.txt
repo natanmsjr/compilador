@@ -1,0 +1,17 @@
+programa _teste_estrutura_invalido
+/*
+* 
+* Teste de Comentario válido 
+* 
+*/
+//
+/*
+	// */
+*/
+programa teste07
+inicio
+fim.
+
+inicio
+	real: $;
+fim.

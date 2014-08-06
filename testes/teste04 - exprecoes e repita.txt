@@ -1,0 +1,21 @@
+programa teste4
+inicio
+
+	inteiro : a;
+	inteiro : a;
+	inteiro : a;
+	
+	// testando atribuições e expressões
+	a<- 4;
+	a<- 'asd';
+	a<- - a + b * (3/2);
+
+	escreva(a);
+	leia(b);
+		
+	// testando repita
+	repita
+		escreva(a);
+	ate ((a = b) ou (2*b = a));
+	
+fim.

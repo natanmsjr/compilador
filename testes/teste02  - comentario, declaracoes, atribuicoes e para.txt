@@ -1,0 +1,25 @@
+programa teste02
+inicio
+/*
+	/*
+	Testando comentário
+	*/
+*/
+	// testando declaração
+	inteiro: a;
+	real : b;
+	caractere: s;
+	inteiro: v[5];
+	
+	
+	// testando atribuição
+	b <- 1;
+	s <- 'opa';
+	
+	// testando para
+	para i de 0 ate 10 faca
+		// tentando escreva
+		escreva('a', b);		
+	fim para;
+
+fim.

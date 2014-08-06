@@ -1,0 +1,20 @@
+programa teste03
+inicio
+/*
+/*
+*/
+*/
+	inteiro: i;
+	i <- - 1 + 2;
+	
+	// testando avalie
+	avalie(a)
+		caso 1: escreva(a);
+		senao : a <- 2;
+	fim avalie;
+	se (nao (a = b)) entao
+		leia(a);
+		escreva(a);
+	fim se;
+	
+fim.

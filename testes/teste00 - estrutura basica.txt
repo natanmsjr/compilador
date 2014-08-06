@@ -1,0 +1,5 @@
+// testando programa base
+programa teste00
+inicio
+
+fim.
