@@ -8,12 +8,8 @@ import compilador.analysis.*;
 @SuppressWarnings("nls")
 public final class AAlgoritmo extends PAlgoritmo
 {
-    private TPrograma _programa_;
-    private TId _id_;
-    private TInicio _inicio_;
     private final LinkedList<PDeclaracao> _declaracao_ = new LinkedList<PDeclaracao>();
     private final LinkedList<PComandos> _comandos_ = new LinkedList<PComandos>();
-    private TFim _fim_;
 
     public AAlgoritmo()
     {
@@ -21,25 +17,13 @@ public final class AAlgoritmo extends PAlgoritmo
     }
 
     public AAlgoritmo(
-        @SuppressWarnings("hiding") TPrograma _programa_,
-        @SuppressWarnings("hiding") TId _id_,
-        @SuppressWarnings("hiding") TInicio _inicio_,
         @SuppressWarnings("hiding") List<?> _declaracao_,
-        @SuppressWarnings("hiding") List<?> _comandos_,
-        @SuppressWarnings("hiding") TFim _fim_)
+        @SuppressWarnings("hiding") List<?> _comandos_)
     {
         // Constructor
-        setPrograma(_programa_);
-
-        setId(_id_);
-
-        setInicio(_inicio_);
-
         setDeclaracao(_declaracao_);
 
         setComandos(_comandos_);
-
-        setFim(_fim_);
 
     }
 
@@ -47,93 +31,14 @@ public final class AAlgoritmo extends PAlgoritmo
     public Object clone()
     {
         return new AAlgoritmo(
-            cloneNode(this._programa_),
-            cloneNode(this._id_),
-            cloneNode(this._inicio_),
             cloneList(this._declaracao_),
-            cloneList(this._comandos_),
-            cloneNode(this._fim_));
+            cloneList(this._comandos_));
     }
 
     @Override
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseAAlgoritmo(this);
-    }
-
-    public TPrograma getPrograma()
-    {
-        return this._programa_;
-    }
-
-    public void setPrograma(TPrograma node)
-    {
-        if(this._programa_ != null)
-        {
-            this._programa_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._programa_ = node;
-    }
-
-    public TId getId()
-    {
-        return this._id_;
-    }
-
-    public void setId(TId node)
-    {
-        if(this._id_ != null)
-        {
-            this._id_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._id_ = node;
-    }
-
-    public TInicio getInicio()
-    {
-        return this._inicio_;
-    }
-
-    public void setInicio(TInicio node)
-    {
-        if(this._inicio_ != null)
-        {
-            this._inicio_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._inicio_ = node;
     }
 
     public LinkedList<PDeclaracao> getDeclaracao()
@@ -188,65 +93,18 @@ public final class AAlgoritmo extends PAlgoritmo
         }
     }
 
-    public TFim getFim()
-    {
-        return this._fim_;
-    }
-
-    public void setFim(TFim node)
-    {
-        if(this._fim_ != null)
-        {
-            this._fim_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._fim_ = node;
-    }
-
     @Override
     public String toString()
     {
         return ""
-            + toString(this._programa_)
-            + toString(this._id_)
-            + toString(this._inicio_)
             + toString(this._declaracao_)
-            + toString(this._comandos_)
-            + toString(this._fim_);
+            + toString(this._comandos_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._programa_ == child)
-        {
-            this._programa_ = null;
-            return;
-        }
-
-        if(this._id_ == child)
-        {
-            this._id_ = null;
-            return;
-        }
-
-        if(this._inicio_ == child)
-        {
-            this._inicio_ = null;
-            return;
-        }
-
         if(this._declaracao_.remove(child))
         {
             return;
@@ -257,12 +115,6 @@ public final class AAlgoritmo extends PAlgoritmo
             return;
         }
 
-        if(this._fim_ == child)
-        {
-            this._fim_ = null;
-            return;
-        }
-
         throw new RuntimeException("Not a child.");
     }
 
@@ -270,24 +122,6 @@ public final class AAlgoritmo extends PAlgoritmo
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._programa_ == oldChild)
-        {
-            setPrograma((TPrograma) newChild);
-            return;
-        }
-
-        if(this._id_ == oldChild)
-        {
-            setId((TId) newChild);
-            return;
-        }
-
-        if(this._inicio_ == oldChild)
-        {
-            setInicio((TInicio) newChild);
-            return;
-        }
-
         for(ListIterator<PDeclaracao> i = this._declaracao_.listIterator(); i.hasNext();)
         {
             if(i.next() == oldChild)
@@ -322,12 +156,6 @@ public final class AAlgoritmo extends PAlgoritmo
                 oldChild.parent(null);
                 return;
             }
-        }
-
-        if(this._fim_ == oldChild)
-        {
-            setFim((TFim) newChild);
-            return;
         }
 
         throw new RuntimeException("Not a child.");

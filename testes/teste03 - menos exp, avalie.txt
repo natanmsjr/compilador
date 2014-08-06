@@ -13,7 +13,7 @@ inicio
 		senao : a <- 2;
 	fim avalie;
 	se (nao (a = b)) entao
-		leia(a);
+		leia(a, b);
 		escreva(a);
 	fim se;
 	

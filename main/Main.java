@@ -12,14 +12,14 @@ public class Main
 	public static void main(String[] args) throws ParserException, LexerException, IOException
     {		
 		System.out.println("Iniciando testes... \n");
-		System.out.println("Opção 1 - Leitura de arquivos específicos por argumento: \n");
+		System.out.println("Opção 1 - Leitura de arquivos especificos por argumento: \n");
 		if (args.length > 0){ // Verifica se existe os aquivos como argumentos de entrada
 			leitorArgumentos(args); //ler arquivos de testes por argumentos a pedido do professor
 		}
 		else{
 			if(args.length <= 0)
-				System.out.println("\t Não foi passado nenhum arquivo. \n");
-			System.out.println("Opção 2 - Leitura de arquivos armazenados no diretório './testes': \n");
+				System.out.println("\t Nao foi passado nenhum arquivo. \n");
+			System.out.println("Opção 2 - Leitura de arquivos armazenados no diretorio './testes': \n");
 			leitorDiretorio("./testes"); //ler arquivos de teste através do diretório
 		}
 	}
@@ -44,7 +44,7 @@ public class Main
 		File arquivo = new File(diretorio);
 		String[] arquivos = arquivo.list();
 		if(arquivos == null)
-			System.out.println("\t Não há arquivos nesse diretório. \n");
+			System.out.println("\t Nao ha arquivos nesse diretorio. \n");
 		else{
 			Reader entrada = null;
 			for (int i = 0; i < arquivos.length; i++) {

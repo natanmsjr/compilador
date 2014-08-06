@@ -1,7 +1,7 @@
 programa teste4
 inicio
 
-	inteiro : a;
+	inteiro : a, b;
 	inteiro : a;
 	inteiro : a;
 	
@@ -11,7 +11,7 @@ inicio
 	a<- - a + b * (3/2);
 
 	escreva(a);
-	leia(b);
+	leia(b, a);
 		
 	// testando repita
 	repita

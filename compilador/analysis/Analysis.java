@@ -49,9 +49,6 @@ public interface Analysis extends Switch
     void caseAMenorQExpressaoLogica(AMenorQExpressaoLogica node);
     void caseAMaiorIgualExpressaoLogica(AMaiorIgualExpressaoLogica node);
     void caseAMenorIgualExpressaoLogica(AMenorIgualExpressaoLogica node);
-    void caseASenaoSeSenaoSe(ASenaoSeSenaoSe node);
-    void caseACasoPCaso(ACasoPCaso node);
-    void caseASenaoCasoSenaoPCaso(ASenaoCasoSenaoPCaso node);
     void caseAAtribuicaoComandos(AAtribuicaoComandos node);
     void caseALeiaComandos(ALeiaComandos node);
     void caseAEscrevaComandos(AEscrevaComandos node);
@@ -61,6 +58,9 @@ public interface Analysis extends Switch
     void caseARepitaComandos(ARepitaComandos node);
     void caseAParaComandos(AParaComandos node);
     void caseAParaPassoComandos(AParaPassoComandos node);
+    void caseASenaoSeSenaoSe(ASenaoSeSenaoSe node);
+    void caseACasoPCaso(ACasoPCaso node);
+    void caseASenaoCasoSenaoPCaso(ASenaoCasoSenaoPCaso node);
 
     void caseTPonto(TPonto node);
     void caseTDoisPontos(TDoisPontos node);

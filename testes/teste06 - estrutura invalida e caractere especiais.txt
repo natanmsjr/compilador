@@ -7,11 +7,11 @@ programa _teste_estrutura_invalido
 //
 /*
 	// */
-*/
-programa teste07
+*/	
+/*programa teste07
 inicio
-fim.
+fim.*/
 
 inicio
-	real: $;
+	real: _ararara_;
 fim.

@@ -50,18 +50,6 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAAlgoritmo(AAlgoritmo node)
     {
         inAAlgoritmo(node);
-        if(node.getPrograma() != null)
-        {
-            node.getPrograma().apply(this);
-        }
-        if(node.getId() != null)
-        {
-            node.getId().apply(this);
-        }
-        if(node.getInicio() != null)
-        {
-            node.getInicio().apply(this);
-        }
         {
             List<PDeclaracao> copy = new ArrayList<PDeclaracao>(node.getDeclaracao());
             for(PDeclaracao e : copy)
@@ -75,10 +63,6 @@ public class DepthFirstAdapter extends AnalysisAdapter
             {
                 e.apply(this);
             }
-        }
-        if(node.getFim() != null)
-        {
-            node.getFim().apply(this);
         }
         outAAlgoritmo(node);
     }
@@ -181,21 +165,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAVetorVariavel(AVetorVariavel node)
     {
         inAVetorVariavel(node);
-        if(node.getId() != null)
-        {
-            node.getId().apply(this);
-        }
-        if(node.getEColchete() != null)
-        {
-            node.getEColchete().apply(this);
-        }
         if(node.getNumero() != null)
         {
             node.getNumero().apply(this);
-        }
-        if(node.getDColchete() != null)
-        {
-            node.getDColchete().apply(this);
         }
         outAVetorVariavel(node);
     }
@@ -281,24 +253,12 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseADeclDeclaracao(ADeclDeclaracao node)
     {
         inADeclDeclaracao(node);
-        if(node.getTipo() != null)
-        {
-            node.getTipo().apply(this);
-        }
-        if(node.getDoisPontos() != null)
-        {
-            node.getDoisPontos().apply(this);
-        }
         {
             List<PVar> copy = new ArrayList<PVar>(node.getVar());
             for(PVar e : copy)
             {
                 e.apply(this);
             }
-        }
-        if(node.getPontoVirgula() != null)
-        {
-            node.getPontoVirgula().apply(this);
         }
         outADeclDeclaracao(node);
     }
@@ -934,102 +894,6 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAMenorIgualExpressaoLogica(node);
     }
 
-    public void inASenaoSeSenaoSe(ASenaoSeSenaoSe node)
-    {
-        defaultIn(node);
-    }
-
-    public void outASenaoSeSenaoSe(ASenaoSeSenaoSe node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseASenaoSeSenaoSe(ASenaoSeSenaoSe node)
-    {
-        inASenaoSeSenaoSe(node);
-        if(node.getSenao() != null)
-        {
-            node.getSenao().apply(this);
-        }
-        {
-            List<PComandos> copy = new ArrayList<PComandos>(node.getComandos());
-            for(PComandos e : copy)
-            {
-                e.apply(this);
-            }
-        }
-        outASenaoSeSenaoSe(node);
-    }
-
-    public void inACasoPCaso(ACasoPCaso node)
-    {
-        defaultIn(node);
-    }
-
-    public void outACasoPCaso(ACasoPCaso node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseACasoPCaso(ACasoPCaso node)
-    {
-        inACasoPCaso(node);
-        if(node.getCaso() != null)
-        {
-            node.getCaso().apply(this);
-        }
-        if(node.getValor() != null)
-        {
-            node.getValor().apply(this);
-        }
-        if(node.getDoisPontos() != null)
-        {
-            node.getDoisPontos().apply(this);
-        }
-        {
-            List<PComandos> copy = new ArrayList<PComandos>(node.getComandos());
-            for(PComandos e : copy)
-            {
-                e.apply(this);
-            }
-        }
-        outACasoPCaso(node);
-    }
-
-    public void inASenaoCasoSenaoPCaso(ASenaoCasoSenaoPCaso node)
-    {
-        defaultIn(node);
-    }
-
-    public void outASenaoCasoSenaoPCaso(ASenaoCasoSenaoPCaso node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseASenaoCasoSenaoPCaso(ASenaoCasoSenaoPCaso node)
-    {
-        inASenaoCasoSenaoPCaso(node);
-        if(node.getSenao() != null)
-        {
-            node.getSenao().apply(this);
-        }
-        if(node.getDoisPontos() != null)
-        {
-            node.getDoisPontos().apply(this);
-        }
-        {
-            List<PComandos> copy = new ArrayList<PComandos>(node.getComandos());
-            for(PComandos e : copy)
-            {
-                e.apply(this);
-            }
-        }
-        outASenaoCasoSenaoPCaso(node);
-    }
-
     public void inAAtribuicaoComandos(AAtribuicaoComandos node)
     {
         defaultIn(node);
@@ -1247,5 +1111,101 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getFim().apply(this);
         }
         outAParaPassoComandos(node);
+    }
+
+    public void inASenaoSeSenaoSe(ASenaoSeSenaoSe node)
+    {
+        defaultIn(node);
+    }
+
+    public void outASenaoSeSenaoSe(ASenaoSeSenaoSe node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseASenaoSeSenaoSe(ASenaoSeSenaoSe node)
+    {
+        inASenaoSeSenaoSe(node);
+        if(node.getSenao() != null)
+        {
+            node.getSenao().apply(this);
+        }
+        {
+            List<PComandos> copy = new ArrayList<PComandos>(node.getComandos());
+            for(PComandos e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        outASenaoSeSenaoSe(node);
+    }
+
+    public void inACasoPCaso(ACasoPCaso node)
+    {
+        defaultIn(node);
+    }
+
+    public void outACasoPCaso(ACasoPCaso node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseACasoPCaso(ACasoPCaso node)
+    {
+        inACasoPCaso(node);
+        if(node.getCaso() != null)
+        {
+            node.getCaso().apply(this);
+        }
+        if(node.getValor() != null)
+        {
+            node.getValor().apply(this);
+        }
+        if(node.getDoisPontos() != null)
+        {
+            node.getDoisPontos().apply(this);
+        }
+        {
+            List<PComandos> copy = new ArrayList<PComandos>(node.getComandos());
+            for(PComandos e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        outACasoPCaso(node);
+    }
+
+    public void inASenaoCasoSenaoPCaso(ASenaoCasoSenaoPCaso node)
+    {
+        defaultIn(node);
+    }
+
+    public void outASenaoCasoSenaoPCaso(ASenaoCasoSenaoPCaso node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseASenaoCasoSenaoPCaso(ASenaoCasoSenaoPCaso node)
+    {
+        inASenaoCasoSenaoPCaso(node);
+        if(node.getSenao() != null)
+        {
+            node.getSenao().apply(this);
+        }
+        if(node.getDoisPontos() != null)
+        {
+            node.getDoisPontos().apply(this);
+        }
+        {
+            List<PComandos> copy = new ArrayList<PComandos>(node.getComandos());
+            for(PComandos e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        outASenaoCasoSenaoPCaso(node);
     }
 }

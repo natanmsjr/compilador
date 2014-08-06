@@ -8,10 +8,7 @@ import compilador.analysis.*;
 @SuppressWarnings("nls")
 public final class ADeclDeclaracao extends PDeclaracao
 {
-    private PTipo _tipo_;
-    private TDoisPontos _doisPontos_;
     private final LinkedList<PVar> _var_ = new LinkedList<PVar>();
-    private TPontoVirgula _pontoVirgula_;
 
     public ADeclDeclaracao()
     {
@@ -19,19 +16,10 @@ public final class ADeclDeclaracao extends PDeclaracao
     }
 
     public ADeclDeclaracao(
-        @SuppressWarnings("hiding") PTipo _tipo_,
-        @SuppressWarnings("hiding") TDoisPontos _doisPontos_,
-        @SuppressWarnings("hiding") List<?> _var_,
-        @SuppressWarnings("hiding") TPontoVirgula _pontoVirgula_)
+        @SuppressWarnings("hiding") List<?> _var_)
     {
         // Constructor
-        setTipo(_tipo_);
-
-        setDoisPontos(_doisPontos_);
-
         setVar(_var_);
-
-        setPontoVirgula(_pontoVirgula_);
 
     }
 
@@ -39,66 +27,13 @@ public final class ADeclDeclaracao extends PDeclaracao
     public Object clone()
     {
         return new ADeclDeclaracao(
-            cloneNode(this._tipo_),
-            cloneNode(this._doisPontos_),
-            cloneList(this._var_),
-            cloneNode(this._pontoVirgula_));
+            cloneList(this._var_));
     }
 
     @Override
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseADeclDeclaracao(this);
-    }
-
-    public PTipo getTipo()
-    {
-        return this._tipo_;
-    }
-
-    public void setTipo(PTipo node)
-    {
-        if(this._tipo_ != null)
-        {
-            this._tipo_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._tipo_ = node;
-    }
-
-    public TDoisPontos getDoisPontos()
-    {
-        return this._doisPontos_;
-    }
-
-    public void setDoisPontos(TDoisPontos node)
-    {
-        if(this._doisPontos_ != null)
-        {
-            this._doisPontos_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._doisPontos_ = node;
     }
 
     public LinkedList<PVar> getVar()
@@ -127,65 +62,19 @@ public final class ADeclDeclaracao extends PDeclaracao
         }
     }
 
-    public TPontoVirgula getPontoVirgula()
-    {
-        return this._pontoVirgula_;
-    }
-
-    public void setPontoVirgula(TPontoVirgula node)
-    {
-        if(this._pontoVirgula_ != null)
-        {
-            this._pontoVirgula_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._pontoVirgula_ = node;
-    }
-
     @Override
     public String toString()
     {
         return ""
-            + toString(this._tipo_)
-            + toString(this._doisPontos_)
-            + toString(this._var_)
-            + toString(this._pontoVirgula_);
+            + toString(this._var_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._tipo_ == child)
-        {
-            this._tipo_ = null;
-            return;
-        }
-
-        if(this._doisPontos_ == child)
-        {
-            this._doisPontos_ = null;
-            return;
-        }
-
         if(this._var_.remove(child))
         {
-            return;
-        }
-
-        if(this._pontoVirgula_ == child)
-        {
-            this._pontoVirgula_ = null;
             return;
         }
 
@@ -196,18 +85,6 @@ public final class ADeclDeclaracao extends PDeclaracao
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._tipo_ == oldChild)
-        {
-            setTipo((PTipo) newChild);
-            return;
-        }
-
-        if(this._doisPontos_ == oldChild)
-        {
-            setDoisPontos((TDoisPontos) newChild);
-            return;
-        }
-
         for(ListIterator<PVar> i = this._var_.listIterator(); i.hasNext();)
         {
             if(i.next() == oldChild)
@@ -224,12 +101,6 @@ public final class ADeclDeclaracao extends PDeclaracao
                 oldChild.parent(null);
                 return;
             }
-        }
-
-        if(this._pontoVirgula_ == oldChild)
-        {
-            setPontoVirgula((TPontoVirgula) newChild);
-            return;
         }
 
         throw new RuntimeException("Not a child.");

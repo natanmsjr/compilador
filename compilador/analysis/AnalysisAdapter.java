@@ -297,24 +297,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseASenaoSeSenaoSe(ASenaoSeSenaoSe node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseACasoPCaso(ACasoPCaso node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseASenaoCasoSenaoPCaso(ASenaoCasoSenaoPCaso node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseAAtribuicaoComandos(AAtribuicaoComandos node)
     {
         defaultCase(node);
@@ -364,6 +346,24 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAParaPassoComandos(AParaPassoComandos node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseASenaoSeSenaoSe(ASenaoSeSenaoSe node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseACasoPCaso(ACasoPCaso node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseASenaoCasoSenaoPCaso(ASenaoCasoSenaoPCaso node)
     {
         defaultCase(node);
     }
